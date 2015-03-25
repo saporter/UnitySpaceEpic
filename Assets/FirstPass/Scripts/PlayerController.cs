@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	private NavMeshAgent navMeshAgent;
 	private bool currentlyMoving;
 	private PhaserWeapon[] phasers;
+	private ShipSystems systems;
 
 	public float PowerCapacity 
 	{
@@ -52,12 +53,19 @@ public class PlayerController : MonoBehaviour {
 
 	public GameObject flagObject;
 
-	void Awake () {
+	void Start () {
 		gameController = GameObject.FindWithTag ("GameController").GetComponent<GameController>();
 		navMeshAgent = GetComponent<NavMeshAgent> ();
 		flags = new List<GameObject> ();
 		_powerLevel = PowerCapacity;
 		currentlyMoving = false;
+
+		systems = GetComponent<ShipSystems> ();
+		if (systems == null) 
+		{
+			systems = gameObject.AddComponent<ShipSystems>();
+			Debug.Log("systems was null in enemeyship.  Added ShipSystems Component manually.");
+		}
 
 		Events.instance.AddListener<RightMouseUpOnBackgroundEvent> (OnRightMouseUpOnBackground);
 		Events.instance.AddListener<CommitToMovementKeyPressEvent> (OnCommitToMovement);

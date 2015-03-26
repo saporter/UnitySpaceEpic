@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SimpleEnemyAI : MonoBehaviour {
+public class SimpleEnemyAI : MonoBehaviour { 
 	private GameObject target;
 	// private NavMeshAgent navMeshAgent;
-	private ShipSystems systems;
+	public ShipSystems systems;
 
 	public float FiringRange = 5f;	// How close I'd like to be to fire
 

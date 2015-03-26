@@ -34,7 +34,7 @@ public class TargetingSystem : MonoBehaviour {
 				if(selector != null) selector.enabled = false;
 				transform.rotation = newRot;
 			}
-		}
+		} 
 	}
 
 	public GameObject ScreenSelection(Ray ray)
@@ -76,9 +76,9 @@ public class TargetingSystem : MonoBehaviour {
 		if(selector && selector.enabled){
 			foreach(PhaserWeapon p in phasers)
 			{
-				if(p.CanFire(hitPoint) && playerShip.PowerLevel >= p.powerCost)
+				if(p.CanFire(hitPoint) && playerShip.systems.CurrentPowerLevel >= p.powerCost)
 				{
-					playerShip.FireWeapon(p, selector.gameObject, hitPoint);
+					playerShip.systems.Fire(selector.gameObject, hitPoint, p);
 				}
 			}
 		}

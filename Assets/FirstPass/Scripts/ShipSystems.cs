@@ -48,6 +48,12 @@ public class ShipSystems : MonoBehaviour {
 		// set { _engineUse = value; }
 	}
 
+	// How much enegery the ship can devote to movement
+	public float KineticPower
+	{
+		get { return Mathf.Min(CurrentPowerLevel, EngineCapacity - CurrentEngineUse); }
+	}
+
 	void Start()
 	{
 		_powerLevel = PowerCapacity;
@@ -65,6 +71,10 @@ public class ShipSystems : MonoBehaviour {
 		_engineUse = 0f;
 	}
 
+	/// <summary>
+	/// Moves to point.
+	/// </summary>
+	/// <param name="point">Point.</param>
 	void MoveToPoint(Vector3 point)
 	{
 		float distance = Vector3.Distance (transform.position, point);
@@ -83,17 +93,30 @@ public class ShipSystems : MonoBehaviour {
 		navAgent.SetDestination (newPos);
 	}
 
+	/// <summary>
+	/// Move the specified point.
+	/// </summary>
+	/// <param name="point">Point.</param>
 	public void Move(Vector3 point)
 	{
 		MoveToPoint (point);
 	}
 
+	/// <summary>
+	/// Move to the specified point and wait.
+	/// </summary>
+	/// <returns>IEnumerator for use in Coroutine.</returns>
+	/// <param name="point">Point.</param>
 	public IEnumerator MoveAndWait(Vector3 point)
 	{
 		MoveToPoint (point);
 		yield return StartCoroutine(WaitForDestination());
 	}
 
+	/// <summary>
+	/// Finishes movement to destination before return from started Coroutine.
+	/// </summary>
+	/// <returns>IEnumerator for use in Coroutine.</returns>
 	public IEnumerator WaitForDestination()
 	{
 		yield return new WaitForSeconds (.5f);		// Seriously has to be a better way than this...
@@ -107,6 +130,28 @@ public class ShipSystems : MonoBehaviour {
 			Debug.Log ("*Moving to destination");
 			yield return new WaitForSeconds(.2f);
 		}
+	}
+
+	public void Fire(GameObject target, Vector3 hit, PhaserWeapon weapon)
+	{
+		if (weapon.Owner != this.gameObject) 
+		{
+			Debug.Log("ShipSystems could not fire.  Weapon does not belong to this ShipSystem.");
+			return;
+		}
+		if (!weapon.CanFire (hit)) 
+		{
+			Debug.Log("Weapon could not fire.  CanFire() returned false.");
+			return;
+		}
+		if (weapon.powerCost > _powerLevel) 
+		{
+			Debug.Log("ShipSystems could not fire.  Not enough power.");
+			return;
+		}
+
+		_powerLevel -= weapon.powerCost;
+		weapon.Fire (target, hit);
 	}
 
 }

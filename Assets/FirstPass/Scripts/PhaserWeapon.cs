@@ -2,6 +2,18 @@
 using System.Collections;
 
 public class PhaserWeapon : MonoBehaviour {
+	private int chargesLeftThisTurn;
+	private LineRenderer beamEffect;
+
+	public int ChargesLeft
+	{
+		get { return chargesLeftThisTurn; }
+	}
+	public GameObject Owner
+	{
+		get { return transform.parent.gameObject;}
+	}
+
 	public GameObject exitAperture;
 	public Material phaserMaterial;
 	public float fieldOfFireAngle = 180f;		// angle from the forward vector of the exitAperture to include in valid FOF
@@ -13,13 +25,12 @@ public class PhaserWeapon : MonoBehaviour {
 	public float powerCost = 5f;
 	public int chargesPerTurn = 1;
 
-	private int chargesLeftThisTurn;
-	public int ChargesLeft
-	{
-		get { return chargesLeftThisTurn; }
-	}
 
-	private LineRenderer beamEffect;
+
+
+
+
+
 
 	// Use this for initialization
 	void Start () {

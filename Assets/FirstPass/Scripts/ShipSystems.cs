@@ -12,6 +12,7 @@ public class ShipSystems : MonoBehaviour {
 	{
 		get 
 		{
+			//if(this == null) return 0f;
 			PowerGenerator[] generators = GetComponentsInChildren<PowerGenerator>();
 			float totalPower = 0f;
 			foreach(PowerGenerator g in generators)
@@ -77,6 +78,11 @@ public class ShipSystems : MonoBehaviour {
 			throw new UnityException ("navAgent can not be null in ShipSystems.  Must attached NavMeshAgent to GameObject.");
 
 		Events.instance.AddListener<TransitionToPlayerTurnEvent> (NewTurn);
+	}
+
+	void OnDestroy()
+	{
+		Events.instance.RemoveListener<TransitionToPlayerTurnEvent> (NewTurn);
 	}
 
 	void NewTurn(TransitionToPlayerTurnEvent e)

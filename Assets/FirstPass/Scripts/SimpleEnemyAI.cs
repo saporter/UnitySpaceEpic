@@ -33,6 +33,11 @@ public class SimpleEnemyAI : MonoBehaviour {
 		Events.instance.AddListener<TransitionToEnemyTurnEvent> (StartTurn);
 	}
 
+	void OnDestroy()
+	{
+		Events.instance.RemoveListener<TransitionToEnemyTurnEvent>(StartTurn);
+	}
+
 	void Update()
 	{
 		// Testing scan...

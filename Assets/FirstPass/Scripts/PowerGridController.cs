@@ -26,10 +26,14 @@ public class PowerGridController : MonoBehaviour {
 
 	void Update()
 	{
-		reactorPower.value = (playerShip.systems.CurrentPowerLevel - playerShip.EngineCharge) / playerShip.systems.PowerCapacity;
-		enginePower.value = (playerShip.systems.CurrentEngineUse + playerShip.EngineCharge) / playerShip.systems.EngineCapacity; 
-		phaser1.value = 1f - ((float)phaserWeapon1.ChargesLeft / (float)phaserWeapon1.chargesPerTurn);
-		phaser2.value = 1f - ((float)phaserWeapon2.ChargesLeft / (float)phaserWeapon2.chargesPerTurn);
+		if(playerShip != null && playerShip.systems != null)
+			reactorPower.value = (playerShip.systems.CurrentPowerLevel - playerShip.EngineCharge) / playerShip.systems.PowerCapacity;
+		if(playerShip != null && playerShip.systems != null)
+			enginePower.value = (playerShip.systems.CurrentEngineUse + playerShip.EngineCharge) / playerShip.systems.EngineCapacity; 
+		if(phaserWeapon1 != null)
+			phaser1.value = 1f - ((float)phaserWeapon1.ChargesLeft / (float)phaserWeapon1.chargesPerTurn);
+		if(phaserWeapon2 != null)
+			phaser2.value = 1f - ((float)phaserWeapon2.ChargesLeft / (float)phaserWeapon2.chargesPerTurn);
 	}
 
 }

@@ -20,6 +20,12 @@ public class ShipModule : MonoBehaviour {
 	void DestroyModule()
 	{
 		Instantiate (destroyedEffect, transform.position, transform.rotation);
-		Destroy (gameObject);
+		if (criticalModule) {
+			GameObject g = Instantiate (destroyedEffect, transform.position, transform.rotation) as GameObject;
+			g.GetComponent<ParticleSystem> ().startDelay = .5f;
+			Destroy (transform.parent.gameObject);
+		} else {
+			Destroy (gameObject);
+		}
 	}
 }

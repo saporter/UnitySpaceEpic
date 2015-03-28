@@ -25,13 +25,6 @@ public class PhaserWeapon : MonoBehaviour {
 	public float powerCost = 5f;
 	public int chargesPerTurn = 1;
 
-
-
-
-
-
-
-
 	// Use this for initialization
 	void Start () {
 		beamEffect = gameObject.AddComponent<LineRenderer>() as LineRenderer;
@@ -66,6 +59,10 @@ public class PhaserWeapon : MonoBehaviour {
 			Debug.DrawRay (exitAperture.transform.position, flatHeading, headingColor);
 			Debug.DrawRay (exitAperture.transform.position, exitAperture.transform.forward);
 			Debug.DrawRay (exitAperture.transform.position, Quaternion.AngleAxis(fieldOfFireAngle, transform.up) * exitAperture.transform.forward, Color.green);
+
+//			if(gameObject.name == "Phaser starboard" && transform.parent.tag == "Player"){
+//				Debug.Log(InFieldOfFire(flatHeading));
+//			}
 		}
 	}
 
@@ -74,16 +71,29 @@ public class PhaserWeapon : MonoBehaviour {
 		if (ChargesLeft <= 0)
 			return false;
 
-		// Get direction of target as Vector3
-		Vector3 heading = (hit - exitAperture.transform.position).normalized; 
-		Vector3 flatHeading = new Vector3(heading.x, 0f, heading.z);
+//		// Get direction of target as Vector3
+//		Vector3 heading = (hit - exitAperture.transform.position).normalized; 
+//		Vector3 flatHeading = new Vector3(heading.x, 0f, heading.z);
+//
+//		// Determine if direction is within field of fire using angles
+//		float headingAngle = Vector3.Angle (exitAperture.transform.forward, flatHeading);
+//		float rotDir = Vector3.Dot (Vector3.Cross (exitAperture.transform.forward, flatHeading), exitAperture.transform.up);
+//		headingAngle = rotDir < 0 ? 360f - headingAngle : headingAngle;
 
-		// Determine if direction is within field of fire using angles
-		float headingAngle = Vector3.Angle (exitAperture.transform.forward, flatHeading);
-		float rotDir = Vector3.Dot (Vector3.Cross (exitAperture.transform.forward, flatHeading), exitAperture.transform.up);
+		//return headingAngle <= fieldOfFireAngle;
+		return InFieldOfFire (hit - exitAperture.transform.position) == 0f;
+	}
+
+	public float InFieldOfFire(Vector3 heading)
+	{
+		heading.Normalize ();
+		heading = new Vector3(heading.x, 0f, heading.z);	// flatten
+
+		float headingAngle = Vector3.Angle (exitAperture.transform.forward, heading);
+		float rotDir = Vector3.Dot (Vector3.Cross (exitAperture.transform.forward, heading), exitAperture.transform.up);
 		headingAngle = rotDir < 0 ? 360f - headingAngle : headingAngle;
-
-		return headingAngle <= fieldOfFireAngle;
+		
+		return headingAngle <= fieldOfFireAngle ? 0f : (headingAngle - fieldOfFireAngle) > (360f - fieldOfFireAngle) / 2f ? headingAngle - 360f : headingAngle - fieldOfFireAngle;
 	}
 
 	public void Fire(GameObject target, Vector3 hit)

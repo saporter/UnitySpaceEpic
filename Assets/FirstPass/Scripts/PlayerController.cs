@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour {
 		Events.instance.AddListener<RightMouseUpOnBackgroundEvent> (OnRightMouseUpOnBackground);
 		Events.instance.AddListener<CommitToMovementKeyPressEvent> (OnCommitToMovement);
 		Events.instance.AddListener<ClearSelectionKeyPressEvent> (ClearSelection);
+		Events.instance.AddListener<TransitionToEnemyTurnEvent> (ClearSelection);
 	}
 
 	void OnRightMouseUpOnBackground(RightMouseUpOnBackgroundEvent e) 
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour {
 		StartCoroutine (FollowPath());
 	}
 
-	void ClearSelection( ClearSelectionKeyPressEvent e)
+	void ClearSelection( GameEvent e)
 	{
 		if (!currentlyMoving && flags.Count > 0) {
 			ClearWaypoints();

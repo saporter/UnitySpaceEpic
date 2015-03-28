@@ -4,7 +4,6 @@ using System.Collections;
 public class TargetingSystem : MonoBehaviour {
 
 	// One selection
-	public PhaserWeapon[] phasers;
 	private BoundBoxes_BoundBox selector;
 
 
@@ -74,6 +73,7 @@ public class TargetingSystem : MonoBehaviour {
 	void OnWeaponFire(FireWeaponKeyPressEvent e) 
 	{
 		if(selector && selector.enabled){
+			PhaserWeapon[] phasers = transform.parent.GetComponentsInChildren<PhaserWeapon>();
 			foreach(PhaserWeapon p in phasers)
 			{
 				if(p.CanFire(hitPoint) && playerShip.systems.CurrentPowerLevel >= p.powerCost)

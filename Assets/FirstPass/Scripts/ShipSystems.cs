@@ -42,6 +42,20 @@ public class ShipSystems : MonoBehaviour {
 		}
 	}
 
+	public float RotationSpeed
+	{
+		get 
+		{
+			EngineController[] engines = GetComponentsInChildren<EngineController>();
+			float totalSpeed = 0f;
+			foreach(EngineController e in engines)
+			{
+				totalSpeed += e.RotationSpeed;
+			}
+			return totalSpeed;
+		}
+	}
+
 	public float CurrentEngineUse
 	{
 		get { return _engineUse; }
@@ -127,8 +141,25 @@ public class ShipSystems : MonoBehaviour {
 		
 		while (!(navAgent.pathStatus == NavMeshPathStatus.PathComplete && navAgent.remainingDistance <= float.Epsilon) )
 		{
-			Debug.Log ("*Moving to destination");
 			yield return new WaitForSeconds(.2f);
+		}
+	}
+
+	public IEnumerator Rotate (float degrees)
+	{
+		if (_powerLevel > degrees * EngineController.RotationCost) {
+			//Quaternion newRotation = Quaternion.AngleAxis (degrees, transform.up);
+			float speed = RotationSpeed;
+			float direction = degrees > 0 ? 1f : -1f;
+			degrees *= direction;
+			while (degrees > 0) {
+				float step = speed * Time.deltaTime * direction;
+				transform.Rotate(new Vector3(0f, step, 0f));
+				degrees -= step * direction;
+				yield return null;
+			}
+
+			_powerLevel -= degrees * EngineController.RotationCost;
 		}
 	}
 

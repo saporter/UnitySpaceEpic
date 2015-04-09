@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -9,7 +9,7 @@ public class TargetingScreen : MonoBehaviour {
 
 	private TargetingSystem weaponSystem;
 	private RectTransform rectTransform;
-	private ShipModule selectedModule;
+	private ShipModule1 selectedModule;
 
 	void Start () {
 		rectTransform = GetComponent<RectTransform> ();
@@ -45,7 +45,7 @@ public class TargetingScreen : MonoBehaviour {
 	{
 		GameObject selectedObject = weaponSystem.ScreenSelection (targetingCamera.ScreenPointToRay (GetLocalMousePosition ()));
 		if(selectedObject){
-			selectedModule = selectedObject.GetComponent<ShipModule>();
+			selectedModule = selectedObject.GetComponent<ShipModule1>();
 			DrawHealth (selectedModule);
 		}
 	}
@@ -57,7 +57,7 @@ public class TargetingScreen : MonoBehaviour {
 		return local;
 	}
 
-	void DrawHealth(ShipModule module)
+	void DrawHealth(ShipModule1 module)
 	{
 		if (module == null) 
 		{

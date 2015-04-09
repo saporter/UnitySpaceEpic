@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -15,17 +15,17 @@ public class SimpleEnemyAI : MonoBehaviour {
 	private int shipMask;
 
 	// private NavMeshAgent navMeshAgent;
-	public ShipSystems systems;
+	public ShipSystems1 systems;
 
 	public float FiringRange = 5f;	// How close I'd like to be to fire
 
 
 	void Start () {
 		shipMask = LayerMask.GetMask ("Ship");
-		systems = GetComponent<ShipSystems> ();
+		systems = GetComponent<ShipSystems1> ();
 		if (systems == null) 
 		{
-			systems = gameObject.AddComponent<ShipSystems>();
+			systems = gameObject.AddComponent<ShipSystems1>();
 			Debug.Log("systems was null in enemeyship.  Added ShipSystems Component manually.");
 		}
 
@@ -90,11 +90,11 @@ public class SimpleEnemyAI : MonoBehaviour {
 		Debug.Log ("------------ Firing weapons");
 		Debug.Log ("Finding ship modules");
 		yield return null;
-		List<ShipModule> modules = ScanForModules ();
-		foreach (ShipModule module in modules) {
+		List<ShipModule1> modules = ScanForModules ();
+		foreach (ShipModule1 module in modules) {
 			Debug.Log("I found: " + module.gameObject.name);
 		}
-		ShipModule targetModule = ChooseTargetModule (modules);
+		ShipModule1 targetModule = ChooseTargetModule (modules);
 		Debug.Log("I'm targeting: " + targetModule);
 		yield return StartCoroutine(FireWithClosestWeaponOn (targetModule));
 	}
@@ -115,16 +115,16 @@ public class SimpleEnemyAI : MonoBehaviour {
 		}
 	}
 
-	List<ShipModule> ScanForModules()
+	List<ShipModule1> ScanForModules()
 	{
-		List<ShipModule> modules = new List<ShipModule> ();
+		List<ShipModule1> modules = new List<ShipModule1> ();
 		Vector3 heading =  Quaternion.AngleAxis (-(ScanningScope / 2f), transform.up) * (target.transform.position - transform.position);
 		for (int i = 0; i < (int) ScanningScope; ++i) {
 			Ray ray = new Ray (transform.position, heading); 
 			RaycastHit moduleSelected;
 			if (Physics.Raycast (ray, out moduleSelected, 100f, shipMask)) {
-				if(moduleSelected.collider.gameObject.GetComponent<ShipModule>() && !modules.Contains(moduleSelected.collider.gameObject.GetComponent<ShipModule>())){
-					modules.Add(moduleSelected.collider.gameObject.GetComponent<ShipModule>());
+				if(moduleSelected.collider.gameObject.GetComponent<ShipModule1>() && !modules.Contains(moduleSelected.collider.gameObject.GetComponent<ShipModule1>())){
+					modules.Add(moduleSelected.collider.gameObject.GetComponent<ShipModule1>());
 				}
 			}
 			heading =  Quaternion.AngleAxis (1f, transform.up) * heading;
@@ -132,14 +132,14 @@ public class SimpleEnemyAI : MonoBehaviour {
 		return modules;
 	}
 
-	ShipModule ChooseTargetModule(List<ShipModule> modules)
+	ShipModule1 ChooseTargetModule(List<ShipModule1> modules)
 	{
 		if (modules == null || modules.Count == 0)
 			return null;
-		ShipModule killThis = null;
+		ShipModule1 killThis = null;
 		float highestScore = -1f;
 		float heuristic;
-		foreach (ShipModule module in modules) {
+		foreach (ShipModule1 module in modules) {
 			heuristic = 0f;
 			if(module.GetComponent<PhaserWeapon>() != null)
 				heuristic += 1f;
@@ -157,7 +157,7 @@ public class SimpleEnemyAI : MonoBehaviour {
 		return killThis;
 	}
 
-	IEnumerator FireWithClosestWeaponOn (ShipModule targetModule)
+	IEnumerator FireWithClosestWeaponOn (ShipModule1 targetModule)
 	{
 		PhaserWeapon[] weapons = GetComponentsInChildren<PhaserWeapon> ();
 		if (weapons != null && weapons.Length > 0) {

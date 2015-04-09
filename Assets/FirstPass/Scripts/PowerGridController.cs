@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class PowerGridController : MonoBehaviour {
-	public PlayerController playerShip;
+	public PlayerController1 playerShip;
 	public Slider reactorPower;
 	public Slider enginePower;
 	public Slider phaser1;
@@ -13,7 +13,7 @@ public class PowerGridController : MonoBehaviour {
 
 	void Start()
 	{
-		playerShip = playerShip == null ? GameObject.FindWithTag ("Player").GetComponent<PlayerController>() : playerShip;
+		playerShip = playerShip == null ? GameObject.FindWithTag ("Player").GetComponent<PlayerController1>() : playerShip;
 		if (playerShip == null)
 			throw new UnityException ("Could not find Player GameObject (Start() in PowerGrid)");
 

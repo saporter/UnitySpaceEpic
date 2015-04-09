@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Weapon : MonoBehaviour {
@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour {
 
 	public void Fire(GameObject target, Vector3 hit)
 	{
-		ShipModule enemy = target.GetComponent<ShipModule> ();
+		ShipModule1 enemy = target.GetComponent<ShipModule1> ();
 		Quaternion rot = Quaternion.LookRotation ((transform.position - hit).normalized) ;
 		GameObject effect = Instantiate (enemy.damageEffect, hit, rot) as GameObject;
 
@@ -32,7 +32,7 @@ public class Weapon : MonoBehaviour {
 		yield return new WaitForSeconds (phaserOnTime);
 		phaser.enabled = false;
 
-		ShipModule enemy = target.GetComponent<ShipModule> ();
+		ShipModule1 enemy = target.GetComponent<ShipModule1> ();
 		Instantiate (enemy.destroyedEffect, enemy.transform.position, enemy.transform.rotation);
 
 		Destroy (target);

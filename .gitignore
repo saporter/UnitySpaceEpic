@@ -1,8 +1,14 @@
 # =============== #
 # Unity generated #
 # =============== #
-Temp/
-Library/
+#- Temp/
+#- Library/
+
+# github (website below) change
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
@@ -18,6 +24,26 @@ obj/
 *.user
 *.unityproj
 *.booproj
+
+# https://github.com/github/gitignore/blob/master/Unity.gitignore
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+
+# Unity3D generated meta files
+*.pidb.meta
+
+# Unity3D Generated File On Crash Reports
+sysinfo.txt
+
+# END github.com adds
+
 
 # ============ #
 # OS generated #

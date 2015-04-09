@@ -10,13 +10,13 @@ public class TargetingSystem : MonoBehaviour {
 	private int enemyMask;
 	private float camRayLength;
 	private Vector3 hitPoint;
-	private PlayerController playerShip;
+	private PlayerController1 playerShip;
 	private GameObject target;
 	
 	void Start () {
 		enemyMask = LayerMask.GetMask ("Enemy");
 		camRayLength = 300.0f;
-		playerShip = playerShip == null ? GameObject.FindWithTag ("Player").GetComponent<PlayerController>() : playerShip;
+		playerShip = playerShip == null ? GameObject.FindWithTag ("Player").GetComponent<PlayerController1>() : playerShip;
 		if (playerShip == null)
 			throw new UnityException ("Could not find Player GameObject");
 

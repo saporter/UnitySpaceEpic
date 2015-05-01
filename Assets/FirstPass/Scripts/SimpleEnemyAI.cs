@@ -141,7 +141,7 @@ public class SimpleEnemyAI : MonoBehaviour {
 		float heuristic;
 		foreach (ShipModule1 module in modules) {
 			heuristic = 0f;
-			if(module.GetComponent<PhaserWeapon>() != null)
+			if(module.GetComponent<PhaserWeapon1>() != null)
 				heuristic += 1f;
 			if(module.GetComponent<EngineController>() != null)
 				heuristic += 1f;
@@ -159,11 +159,11 @@ public class SimpleEnemyAI : MonoBehaviour {
 
 	IEnumerator FireWithClosestWeaponOn (ShipModule1 targetModule)
 	{
-		PhaserWeapon[] weapons = GetComponentsInChildren<PhaserWeapon> ();
+		PhaserWeapon1[] weapons = GetComponentsInChildren<PhaserWeapon1> ();
 		if (weapons != null && weapons.Length > 0) {
-			PhaserWeapon firingWith = null;
+			PhaserWeapon1 firingWith = null;
 			float degreesToRotate = 180f;
-			foreach (PhaserWeapon weapon in weapons){
+			foreach (PhaserWeapon1 weapon in weapons){
 				Vector3 heading = targetModule.transform.position - weapon.exitAperture.transform.position;
 				float offset = weapon.InFieldOfFire(heading);
 				Debug.Log("Degree offset for weapon " + weapon.name + " is " + offset);

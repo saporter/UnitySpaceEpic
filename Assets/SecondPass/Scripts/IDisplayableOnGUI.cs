@@ -2,9 +2,10 @@
 using System.Collections;
 
 public interface IDisplayableOnGUI {
-	GraphicData selector { get; }
+	GraphicData Selector { get; }
 
 	void Show();
+	void ShowIfVisibleFrom(Vector3 position);
 	void Hide();
 	void UpdatePosition();
 	void ShowOnPlayerMovement(bool show);

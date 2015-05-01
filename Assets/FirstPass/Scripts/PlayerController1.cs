@@ -8,7 +8,7 @@ public class PlayerController1 : MonoBehaviour {
 	private GameController gameController;
 	//private NavMeshAgent navMeshAgent;
 	private bool currentlyMoving;
-	private PhaserWeapon[] phasers;
+	private PhaserWeapon1[] phasers;
 
 	public float EngineCharge
 	{

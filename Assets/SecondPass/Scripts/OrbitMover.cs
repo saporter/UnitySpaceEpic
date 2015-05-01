@@ -1,20 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class OrbitMover : MonoBehaviour, IMovable {
+public class OrbitMover : MonoBehaviour, INavigationSystem {
 	private bool stillRotating = false;
 
 	public float speed = 5f;
 	public float rotationSpeed = 180f;
-
-	void Awake()
-	{
-		PlayerController player = GetComponent<PlayerController> ();
-		if (player) {
-			player.engines = this;
-		}
-
-	}
 
 	public void Move(Vector3 toPoint, IShipSystems systems)
 	{
@@ -35,8 +26,8 @@ public class OrbitMover : MonoBehaviour, IMovable {
 		// Rotate before moving
 		StartCoroutine (RotateToward (start - transform.position));
 		while (Vector3.Distance(transform.position, start) > Mathf.Epsilon || stillRotating) {
-			transform.position = Vector3.MoveTowards(transform.position, start, speed * Time.deltaTime);
-			yield return new WaitForFixedUpdate();
+			transform.position = Vector3.MoveTowards (transform.position, start, speed * Time.deltaTime);
+			yield return new WaitForFixedUpdate ();
 		}
 
 		// Determine which way around is shortest

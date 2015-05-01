@@ -73,8 +73,8 @@ public class TargetingSystem : MonoBehaviour {
 	void OnWeaponFire(FireWeaponKeyPressEvent e) 
 	{
 		if(selector && selector.enabled){
-			PhaserWeapon[] phasers = transform.parent.GetComponentsInChildren<PhaserWeapon>();
-			foreach(PhaserWeapon p in phasers)
+			PhaserWeapon1[] phasers = transform.parent.GetComponentsInChildren<PhaserWeapon1>();
+			foreach(PhaserWeapon1 p in phasers)
 			{
 				if(p.CanFire(hitPoint) && playerShip.systems.CurrentPowerLevel >= p.powerCost)
 				{

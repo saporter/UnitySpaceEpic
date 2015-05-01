@@ -1,21 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
-	public IShipSystems systems;	// another component or gameobject must register itself in Awake()
-	public IMovable engines;		// another component or gameobject must register itself in Awake()
+	private IWeapon[] weapons;
+	private IEngine[] engines;
+
+	public IShipSystems systems;			// another component or gameobject must register itself in Awake()
+	public INavigationSystem navigation;		// another component or gameobject must register itself in Awake()  
 	public LayerMask floorMask;
 
-
-	void Start(){
+	void Awake()
+	{
+		systems = GetComponent<IShipSystems> ();
+		navigation = GetComponent<INavigationSystem> ();
 		if (systems == null) {
 			Debug.Log("IShipSystems is null.  Adding a default component.");
-			systems = gameObject.AddComponent<ShipSystems>();
+			systems = gameObject.AddComponent<PrototypeShipSystems>();
 		}
-		if (engines == null) {
-			Debug.Log("IMovable is null.  Adding a default component.");
-			engines = gameObject.AddComponent<OrbitMover>();
+		if (navigation == null) {
+			Debug.Log("INavigationSystem is null.  Adding a default component.");
+			navigation = gameObject.AddComponent<OrbitMover>();
 		}
+
+		weapons = GetComponentsInChildren<IWeapon> ();
+		Events.instance.AddListener<EnemyModuleSelectedEvent> (FireOn);
 	}
 
 	void Update()
@@ -38,9 +47,15 @@ public class PlayerController : MonoBehaviour {
 			{
 				systems.Target = GameObject.FindWithTag("Enemy");
 				Events.instance.Raise(new MovementMarkerPlacedEvent(floorHit.point));
-				engines.Move(floorHit.point, systems);
-				//Events.instance.Raise(new RightMouseUpOnBackgroundEvent(floorHit.point, Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)));
+				navigation.Move(floorHit.point, systems);
 			}
+		}
+	}
+
+	void FireOn(EnemyModuleSelectedEvent e)
+	{
+		foreach (IWeapon w in weapons) {
+			w.FireOn(e.target, systems);
 		}
 	}
 }

@@ -169,7 +169,7 @@ public class ShipSystems1 : MonoBehaviour {
 		}
 	}
 
-	public void Fire(GameObject target, Vector3 hit, PhaserWeapon weapon)
+	public void Fire(GameObject target, Vector3 hit, PhaserWeapon1 weapon)
 	{
 		if (weapon.Owner != this.gameObject) 
 		{

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PhaserWeapon : MonoBehaviour {
+public class PhaserWeapon1 : MonoBehaviour {
 	private int chargesLeftThisTurn;
 	private LineRenderer beamEffect;
 

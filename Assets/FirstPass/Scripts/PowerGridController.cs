@@ -8,8 +8,8 @@ public class PowerGridController : MonoBehaviour {
 	public Slider enginePower;
 	public Slider phaser1;
 	public Slider phaser2;
-	public PhaserWeapon phaserWeapon1;
-	public PhaserWeapon phaserWeapon2;
+	public PhaserWeapon1 phaserWeapon1;
+	public PhaserWeapon1 phaserWeapon2;
 
 	void Start()
 	{

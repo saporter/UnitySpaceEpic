@@ -1,18 +1,51 @@
 using UnityEngine;
 using System.Collections;
 
-public class OrbitMover : MonoBehaviour, INavigationSystem {
+public class OrbitMover : MonoBehaviour {
 	private bool stillRotating = false;
 
-	public float speed = 5f;
+	public float speed = 6f;
 	public float rotationSpeed = 180f;
+	public IShipSystems systems;			
+	public LayerMask floorMask;
 
-	public void Move(Vector3 toPoint, IShipSystems systems)
+	void Awake()
+	{
+		systems = GetComponent<IShipSystems> ();
+		GetComponent<Rigidbody> ().isKinematic = true;
+	}
+
+	public void Move(Vector3 toPoint)
 	{
 		Vector3 around = systems.Target == null ? transform.position : systems.Target.transform.position;
 		toPoint.Set (toPoint.x, transform.position.y, toPoint.z);
 
 		StartCoroutine(Orbit(around, toPoint));
+	}
+
+	void Update()
+	{
+		if (Input.GetMouseButton (1)) 
+		{
+			Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+			RaycastHit floorHit;
+			if (Physics.Raycast (camRay, out floorHit, 300f, floorMask)) 
+			{
+				Events.instance.Raise(new PlacingMovementMarkerEvent(floorHit.point));
+			}
+		}
+		else if(Input.GetMouseButtonUp (1))
+		{
+			Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+			RaycastHit floorHit;
+			
+			if (Physics.Raycast (camRay, out floorHit, 300f, floorMask)) 
+			{
+				systems.Target = GameObject.FindWithTag("Enemy");
+				Events.instance.Raise(new MovementMarkerPlacedEvent(floorHit.point));
+				Move(floorHit.point);
+			}
+		}
 	}
 
 	IEnumerator Orbit(Vector3 around, Vector3 toPoint)

@@ -2,6 +2,25 @@
 using System.Collections;
 
 public class PhaserWeapon : MonoBehaviour, IWeapon {
+	#region IWeapon implementation
+
+	bool IWeapon.FireButtonDown (IDamageable target, IShipSystems systems)
+	{
+		throw new System.NotImplementedException ();
+	}
+
+	bool IWeapon.FireButtonDown (Vector3 target, IShipSystems systems)
+	{
+		throw new System.NotImplementedException ();
+	}
+
+	bool IWeapon.UpdateWeapon (Vector3 target, IShipSystems systems)
+	{
+		throw new System.NotImplementedException ();
+	}
+
+	#endregion
+
 	private LineRenderer beamEffect;
 
 	public string Name { get { return "Phaser"; } }
@@ -24,7 +43,7 @@ public class PhaserWeapon : MonoBehaviour, IWeapon {
 		beamEffect.enabled = false;
 	}
 
-	public void FireOn(IDamageable target, IShipSystems systems)
+	public void FireButtonDown(IDamageable target, IShipSystems systems)
 	{	
 		// Determine hit location of target
 		Collider collider = target.GameObj.GetComponent<Collider> ();
@@ -50,6 +69,21 @@ public class PhaserWeapon : MonoBehaviour, IWeapon {
 		
 		// Start handler for deactivating beam effect
 		StartCoroutine (PhaserOffAndDamage(effectDuration, target));
+	}
+
+	public void FireButtonDown(Vector3 target, IShipSystems systems)
+	{
+		throw new System.NotImplementedException ();
+	}
+
+	public void FireButtonUp()
+	{
+		throw new System.NotImplementedException ();
+	}
+
+	public void UpdateWeapon(Vector3 target, IShipSystems systems)
+	{
+		throw new System.NotImplementedException ();
 	}
 
 	IEnumerator PhaserOffAndDamage(float inSeconds, IDamageable toTarget){

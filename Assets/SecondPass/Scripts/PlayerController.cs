@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 	void FireOn(EnemyModuleSelectedEvent e)
 	{
 		foreach (IWeapon w in weapons) {
-			w.FireOn(e.target, systems);
+			w.FireButtonDown(e.target, systems);
 		}
 	}
 }

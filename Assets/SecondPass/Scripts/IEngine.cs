@@ -2,5 +2,8 @@
 using System.Collections;
 
 public interface IEngine {
-	float EngineCapacity { get; }
+	float MaxSpeed { get; }
+	float RotationSpeed { get; }
+	float ReversePenalty { get; }
+	float Acceleration { get; }
 }

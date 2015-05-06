@@ -12,6 +12,7 @@ public class LaserWeapon : MonoBehaviour, IWeapon {
 
 	//private Collider coll;
 	private Transform aperture;
+	private LayerMask shipMask;
 
 	void Awake () {
 		beamEffect = GetComponent<LineRenderer> ();
@@ -26,6 +27,7 @@ public class LaserWeapon : MonoBehaviour, IWeapon {
 		damageEffect = Instantiate (damageEffect, aperture.position, aperture.rotation) as GameObject;
 		damageEffect.transform.parent = this.transform;
 		damageEffect.SetActive (false);
+		shipMask = 1 << LayerMask.NameToLayer ("Ship");
 	}
 
 	void Start()
@@ -57,7 +59,7 @@ public class LaserWeapon : MonoBehaviour, IWeapon {
 		target = source + (target - source).normalized * maxDistance;
 		Ray ray = new Ray (source, target - source);
 		RaycastHit shipHit;
-		if (Physics.Raycast (ray, out shipHit, maxDistance, 1 << gameObject.layer)) {
+		if (Physics.Raycast (ray, out shipHit, maxDistance, shipMask)) {
 			target = shipHit.point;
 			UpdateDamageEffect (target, Quaternion.LookRotation ((source - target).normalized));
 		} else {

@@ -19,11 +19,12 @@ public class ShipSystems : MonoBehaviour, IShipSystems {
 	public float EngineUse { get { return _engineUse; } set { _engineUse += value; } }
 	public float MaxEngineUse { 
 		get { 
-			IEngine[] engines = GetComponentsInChildren<IEngine>();
-			float max = 0f;
-			foreach(IEngine e in engines)
-				max += e.EngineCapacity;
-			return max;
+//			IEngine[] engines = GetComponentsInChildren<IEngine>();
+//			float max = 0f;
+//			foreach(IEngine e in engines)
+//				max += e.EngineCapacity;
+//			return max;
+			return 0f;
 		} 
 	}
 	public GameObject Target { get { return _target; } set { _target = value;} }

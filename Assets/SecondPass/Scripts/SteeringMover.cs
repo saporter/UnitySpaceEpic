@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SteeringMover : MonoBehaviour {
-	public float speed = 6f;
-	public float rotationSpeed = 3f;
-	public float reversePenalty = .5f;
+public class SteeringMover : MonoBehaviour, IMover {
+	#region IMover implementation
+	private IEngine _engines;
+	public IEngine Engines {
+		get { return _engines; }
+		set { _engines = value; }
+	}
+
+	#endregion
+
 	public float thrustStages = 2f;
 	public float currentStage = 0f;
 
@@ -13,6 +19,9 @@ public class SteeringMover : MonoBehaviour {
 
 	void Awake () {
 		rigidBody = GetComponent<Rigidbody> ();
+		/* Change how this works... */
+		//Engines = GetComponentInChildren<IEngine> ();
+		/* End Change */
 	}
 	
 	// Update is called once per frame
@@ -24,15 +33,15 @@ public class SteeringMover : MonoBehaviour {
 			if(currentStage > thrustStages) currentStage = thrustStages;
 			if(currentStage < -thrustStages) currentStage = -thrustStages;
 
-			float newVelocity = (currentStage / thrustStages) * speed;
-			rigidBody.velocity = transform.forward * (currentStage > 0 ? newVelocity : reversePenalty * newVelocity);
+			float newVelocity = (currentStage / thrustStages) * _engines.MaxSpeed;
+			rigidBody.velocity = transform.forward * (currentStage > 0 ? newVelocity : _engines.ReversePenalty * newVelocity);
 
 		}
 
 		float dir = directionChange ();
 		if (dir != 0) {
 			Vector3 rot = rigidBody.rotation.eulerAngles;
-			rigidBody.rotation = Quaternion.Euler(rot.x, rot.y + dir * rotationSpeed, rot.z); 
+			rigidBody.rotation = Quaternion.Euler(rot.x, rot.y + dir * _engines.RotationSpeed, rot.z); 
 			rigidBody.velocity = currentStage > 0 ? transform.forward * rigidBody.velocity.magnitude : transform.forward * -rigidBody.velocity.magnitude;
 		}
 	}
@@ -60,6 +69,6 @@ public class SteeringMover : MonoBehaviour {
 
 	void OnCollisionExit(){
 		rigidBody.angularVelocity = Vector3.zero;
-		currentStage = currentStage > 0 ? rigidBody.velocity.magnitude / speed : -rigidBody.velocity.magnitude / speed;
+		currentStage = currentStage > 0 ? rigidBody.velocity.magnitude / _engines.MaxSpeed : -rigidBody.velocity.magnitude / _engines.MaxSpeed;
 	}
 }

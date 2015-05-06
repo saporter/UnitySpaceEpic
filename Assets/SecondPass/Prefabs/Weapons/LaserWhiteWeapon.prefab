@@ -1,58 +1,61 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &198456
+--- !u!1 &190244
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 419024}
-  - 114: {fileID: 11461974}
-  - 120: {fileID: 12096306}
-  m_Layer: 0
-  m_Name: LaserWeapon
+  - 4: {fileID: 433142}
+  - 114: {fileID: 11447756}
+  - 120: {fileID: 12067074}
+  m_Layer: 12
+  m_Name: LaserWhiteWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &419024
+--- !u!4 &433142
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 198456}
+  m_GameObject: {fileID: 190244}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11461974
+--- !u!114 &11447756
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 198456}
+  m_GameObject: {fileID: 190244}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b15e33503c59d04fadd1357ada473d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beamEffect: {fileID: 12096306}
+  maxDistance: 10
+  maxCharge: 1.5
+  damagePerSecond: 7
+  beamEffect: {fileID: 12067074}
   damageEffect: {fileID: 100000, guid: afed1231887aed5479f1935fef86ed82, type: 2}
---- !u!120 &12096306
+--- !u!120 &12067074
 LineRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 198456}
+  m_GameObject: {fileID: 190244}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: c51f4ec1a012ff24e8356491b8a0ad1d, type: 2}
+  - {fileID: 2100000, guid: 1cfe02ffd0b74854ea5bcd1a3c63ac3c, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -88,5 +91,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 198456}
+  m_RootGameObject: {fileID: 190244}
   m_IsPrefabParent: 1

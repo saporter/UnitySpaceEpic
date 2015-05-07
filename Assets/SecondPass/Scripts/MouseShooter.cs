@@ -23,17 +23,7 @@ public class MouseShooter : MonoBehaviour, IShooter {
 
 	private Coroutine p_firing;	// used to stop coroutines
 	private Coroutine s_firing; // used to stop coroutines
-	
-	// Use this for initialization
-	void Awake () {
-		/* Change how this works... */
-//		IWeapon[] weapons = GetComponentsInChildren<IWeapon>();
-//		if (weapons != null && weapons.Length > 0) {
-//			_primary = weapons[0];
-//			_secondary = weapons.Length > 1 ? weapons[1] : null;
-//		}
-		/* End Change*/
-	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -68,8 +58,7 @@ public class MouseShooter : MonoBehaviour, IShooter {
 
 	IEnumerator Firing(IWeapon weapon)
 	{
-		Debug.Log ("Consider a backup shutoff for Firing Coroutine in MouseShooter");
-		while (true) {
+		while (Input.GetMouseButton(0) || Input.GetMouseButton(1)) {
 			Vector3? target = MousePointOnFloor();
 			if(target.HasValue)
 				weapon.UpdateWeapon(target.Value, null);

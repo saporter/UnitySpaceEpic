@@ -20,50 +20,35 @@ public class MouseShooter : MonoBehaviour, IShooter {
 
 	public LayerMask floorMask;
 
-
-	private Coroutine p_firing;	// used to stop coroutines
-	private Coroutine s_firing; // used to stop coroutines
-
+	private bool primaryUp = false;		// when primary button is released
+	private bool secondaryUp = false;	// when secondary button is released
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		// Primary weapon
-		if (Input.GetMouseButtonDown (0) && _primary != null) {
+		if (Input.GetAxisRaw("Fire1") > 0f && _primary != null) {
 			Vector3? target = MousePointOnFloor();
 			if (target.HasValue) 
 			{
-				if(p_firing != null) StopCoroutine(p_firing);
+				primaryUp = true;
 				_primary.FireButtonDown(target.Value, null);
-				p_firing = StartCoroutine(Firing(_primary));
 			}
-		}else if(Input.GetMouseButtonUp(0) && _primary != null){
-			if(p_firing != null) StopCoroutine(p_firing);
+		}else if(primaryUp && _primary != null){
+			primaryUp = false;
 			_primary.FireButtonUp();
 		}
 
 		// Secondary weapon
-		if (Input.GetMouseButtonDown (1) && _secondary != null) {
+		if (Input.GetAxisRaw("Fire2") > 0f && _secondary != null) {
 			Vector3? target = MousePointOnFloor();
 			if (target.HasValue) 
 			{
-				if(s_firing != null) StopCoroutine(s_firing);
+				secondaryUp = true;
 				_secondary.FireButtonDown(target.Value, null);
-				s_firing = StartCoroutine(Firing(_secondary));
 			}
-		}else if(Input.GetMouseButtonUp(1) && _secondary != null){
-			if(s_firing != null) StopCoroutine(s_firing);
+		}else if(secondaryUp && _secondary != null){
+			secondaryUp = false;
 			_secondary.FireButtonUp();
-		}
-	}
-
-	IEnumerator Firing(IWeapon weapon)
-	{
-		while (Input.GetMouseButton(0) || Input.GetMouseButton(1)) {
-			Vector3? target = MousePointOnFloor();
-			if(target.HasValue)
-				weapon.UpdateWeapon(target.Value, null);
-
-			yield return new WaitForFixedUpdate();
 		}
 	}
 

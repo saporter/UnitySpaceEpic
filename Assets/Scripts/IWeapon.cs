@@ -6,5 +6,4 @@ public interface IWeapon {
 	bool FireButtonDown(IDamageable target, IShipSystems systems);
 	bool FireButtonDown(Vector3 target, IShipSystems systems);
 	void FireButtonUp();
-	bool UpdateWeapon(Vector3 target, IShipSystems systems);
 }

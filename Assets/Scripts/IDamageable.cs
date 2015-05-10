@@ -2,7 +2,9 @@
 using System.Collections;
 
 public interface IDamageable {
-	GameObject GameObj { get; }
+	float MaxHealth { get; }
+	float CurrentHealth { get; }
+
 
 	void ApplyDamage(float damage);
 }

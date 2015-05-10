@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11400712}
   m_Layer: 12
   m_Name: Capsule Fighter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,6 +28,7 @@ GameObject:
   - 33: {fileID: 3362036}
   - 136: {fileID: 13683294}
   - 23: {fileID: 2327094}
+  - 114: {fileID: 11441812}
   m_Layer: 12
   m_Name: Mesh
   m_TagString: Untagged
@@ -118,6 +119,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Schematic: {fileID: 117292, guid: 32ad07d7ca4e4e34db53ece35cddb936, type: 2}
+  DestroyedEffect: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
+  MaxHealth: 20
+--- !u!114 &11441812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113a32c8b98978543aba42e6b589a127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &13683294
 CapsuleCollider:
   m_ObjectHideFlags: 1

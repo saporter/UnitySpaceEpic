@@ -62,6 +62,7 @@ public class LaserWeapon : MonoBehaviour, IWeapon {
 		if (Physics.Raycast (ray, out shipHit, maxDistance, shipMask)) {
 			target = shipHit.point;
 			UpdateDamageEffect (target, Quaternion.LookRotation ((source - target).normalized));
+			shipHit.collider.GetComponent<IDamageable>().ApplyDamage(damagePerSecond * Time.deltaTime);
 		} else {
 			StopDamageEffect();
 		}
@@ -78,11 +79,6 @@ public class LaserWeapon : MonoBehaviour, IWeapon {
 		beamEffect.SetPosition (1, aperture.position);
 		beamEffect.enabled = false;
 		StopDamageEffect ();
-	}
-
-	public bool UpdateWeapon(Vector3 target, IShipSystems systems)
-	{
-		return FireButtonDown (target, systems);
 	}
 
 	#endregion

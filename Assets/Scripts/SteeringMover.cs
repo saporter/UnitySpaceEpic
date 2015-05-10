@@ -6,7 +6,11 @@ public class SteeringMover : MonoBehaviour, IMover {
 	private IEngine _engines;
 	public IEngine Engines {
 		get { return _engines; }
-		set { _engines = value; }
+		set {
+			currentStage = 0f;
+			GetComponent<Rigidbody>().velocity = Vector3.zero;
+			_engines = value; 
+		}
 	}
 
 	#endregion
@@ -69,6 +73,8 @@ public class SteeringMover : MonoBehaviour, IMover {
 
 	void OnCollisionExit(){
 		rigidBody.angularVelocity = Vector3.zero;
+		if (_engines == null)
+			return;
 		currentStage = currentStage > 0 ? rigidBody.velocity.magnitude / _engines.MaxSpeed : -rigidBody.velocity.magnitude / _engines.MaxSpeed;
 	}
 }

@@ -18,10 +18,16 @@ public class MouseShooter : MonoBehaviour, IShooter {
 
 	#endregion
 
-	public LayerMask floorMask;
+	[SerializeField] LayerMask floorMask;
 
 	private bool primaryUp = false;		// when primary button is released
 	private bool secondaryUp = false;	// when secondary button is released
+
+	void Awake()
+	{
+		if(floorMask.value == 0)
+			floorMask  = LayerMask.GetMask("Floor");
+	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {

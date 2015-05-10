@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class ShipModule1 : MonoBehaviour {
+public class StarshipModule : MonoBehaviour {
 	public float currentHealth = 10f;
 	public float maxHealth = 10f;
 	public GameObject damageEffect;

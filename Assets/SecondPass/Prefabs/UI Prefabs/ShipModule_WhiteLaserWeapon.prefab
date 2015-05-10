@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11463828}
   - 225: {fileID: 22510418}
   - 114: {fileID: 11453362}
+  - 114: {fileID: 11438418}
   m_Layer: 5
   m_Name: ShipModule_WhiteLaserWeapon
   m_TagString: Untagged
@@ -19,6 +20,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &11438418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062e21b782eb0974a991bd87e8bfbab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _contents: {fileID: 190244, guid: 7a4df25542216bb4eb37d5f237cd00d1, type: 2}
 --- !u!114 &11453362
 MonoBehaviour:
   m_ObjectHideFlags: 1

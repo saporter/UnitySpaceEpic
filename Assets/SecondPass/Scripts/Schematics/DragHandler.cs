@@ -15,6 +15,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		startPosition = transform.position;
 		startParent = transform.parent;
 		GetComponent<CanvasGroup> ().blocksRaycasts = false;
+		Events.instance.Raise (new BeginContainerDragEvent (eventData));
 	}
 
 	#endregion
@@ -39,6 +40,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 		GetComponent<CanvasGroup> ().blocksRaycasts = true;
 		if(transform.parent == startParent)
 			transform.position = startPosition;
+		Events.instance.Raise (new EndContainerDragEvent());
 	}
 
 	#endregion

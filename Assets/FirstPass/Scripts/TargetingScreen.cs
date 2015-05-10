@@ -9,7 +9,7 @@ public class TargetingScreen : MonoBehaviour {
 
 	private TargetingSystem weaponSystem;
 	private RectTransform rectTransform;
-	private ShipModule1 selectedModule;
+	private StarshipModule selectedModule;
 
 	void Start () {
 		rectTransform = GetComponent<RectTransform> ();
@@ -45,7 +45,7 @@ public class TargetingScreen : MonoBehaviour {
 	{
 		GameObject selectedObject = weaponSystem.ScreenSelection (targetingCamera.ScreenPointToRay (GetLocalMousePosition ()));
 		if(selectedObject){
-			selectedModule = selectedObject.GetComponent<ShipModule1>();
+			selectedModule = selectedObject.GetComponent<StarshipModule>();
 			DrawHealth (selectedModule);
 		}
 	}
@@ -57,7 +57,7 @@ public class TargetingScreen : MonoBehaviour {
 		return local;
 	}
 
-	void DrawHealth(ShipModule1 module)
+	void DrawHealth(StarshipModule module)
 	{
 		if (module == null) 
 		{

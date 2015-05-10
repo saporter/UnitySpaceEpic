@@ -104,7 +104,7 @@ public class PhaserWeapon1 : MonoBehaviour {
 		}
 
 		// Get ship module to attack
-		ShipModule1 enemy = target.GetComponent<ShipModule1> ();
+		StarshipModule enemy = target.GetComponent<StarshipModule> ();
 
 		// Start target damage effect
 		Quaternion rot = Quaternion.LookRotation ((transform.position - hit).normalized) ;
@@ -129,7 +129,7 @@ public class PhaserWeapon1 : MonoBehaviour {
 		beamEffect.enabled = false;
 
 		// Calculate damage and apply to target
-		ShipModule1 enemy = target.GetComponent<ShipModule1> ();
+		StarshipModule enemy = target.GetComponent<StarshipModule> ();
 		float dist = (enemy.transform.position - exitAperture.transform.position).magnitude;
 		if (dist <= dropOffStartRange) {
 			enemy.doDamage (maxDamage);

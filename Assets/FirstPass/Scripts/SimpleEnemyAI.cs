@@ -90,11 +90,11 @@ public class SimpleEnemyAI : MonoBehaviour {
 		Debug.Log ("------------ Firing weapons");
 		Debug.Log ("Finding ship modules");
 		yield return null;
-		List<ShipModule1> modules = ScanForModules ();
-		foreach (ShipModule1 module in modules) {
+		List<StarshipModule> modules = ScanForModules ();
+		foreach (StarshipModule module in modules) {
 			Debug.Log("I found: " + module.gameObject.name);
 		}
-		ShipModule1 targetModule = ChooseTargetModule (modules);
+		StarshipModule targetModule = ChooseTargetModule (modules);
 		Debug.Log("I'm targeting: " + targetModule);
 		yield return StartCoroutine(FireWithClosestWeaponOn (targetModule));
 	}
@@ -115,16 +115,16 @@ public class SimpleEnemyAI : MonoBehaviour {
 		}
 	}
 
-	List<ShipModule1> ScanForModules()
+	List<StarshipModule> ScanForModules()
 	{
-		List<ShipModule1> modules = new List<ShipModule1> ();
+		List<StarshipModule> modules = new List<StarshipModule> ();
 		Vector3 heading =  Quaternion.AngleAxis (-(ScanningScope / 2f), transform.up) * (target.transform.position - transform.position);
 		for (int i = 0; i < (int) ScanningScope; ++i) {
 			Ray ray = new Ray (transform.position, heading); 
 			RaycastHit moduleSelected;
 			if (Physics.Raycast (ray, out moduleSelected, 100f, shipMask)) {
-				if(moduleSelected.collider.gameObject.GetComponent<ShipModule1>() && !modules.Contains(moduleSelected.collider.gameObject.GetComponent<ShipModule1>())){
-					modules.Add(moduleSelected.collider.gameObject.GetComponent<ShipModule1>());
+				if(moduleSelected.collider.gameObject.GetComponent<StarshipModule>() && !modules.Contains(moduleSelected.collider.gameObject.GetComponent<StarshipModule>())){
+					modules.Add(moduleSelected.collider.gameObject.GetComponent<StarshipModule>());
 				}
 			}
 			heading =  Quaternion.AngleAxis (1f, transform.up) * heading;
@@ -132,14 +132,14 @@ public class SimpleEnemyAI : MonoBehaviour {
 		return modules;
 	}
 
-	ShipModule1 ChooseTargetModule(List<ShipModule1> modules)
+	StarshipModule ChooseTargetModule(List<StarshipModule> modules)
 	{
 		if (modules == null || modules.Count == 0)
 			return null;
-		ShipModule1 killThis = null;
+		StarshipModule killThis = null;
 		float highestScore = -1f;
 		float heuristic;
-		foreach (ShipModule1 module in modules) {
+		foreach (StarshipModule module in modules) {
 			heuristic = 0f;
 			if(module.GetComponent<PhaserWeapon1>() != null)
 				heuristic += 1f;
@@ -157,7 +157,7 @@ public class SimpleEnemyAI : MonoBehaviour {
 		return killThis;
 	}
 
-	IEnumerator FireWithClosestWeaponOn (ShipModule1 targetModule)
+	IEnumerator FireWithClosestWeaponOn (StarshipModule targetModule)
 	{
 		PhaserWeapon1[] weapons = GetComponentsInChildren<PhaserWeapon1> ();
 		if (weapons != null && weapons.Length > 0) {

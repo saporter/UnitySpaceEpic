@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour {
 		gameMenu.SetActive (false);
 	}
 
+	void Start()
+	{
+		GameObject.FindGameObjectWithTag ("Player").GetComponent<IChassis> ().SchematicUIClone.transform.SetParent (gameMenu.transform, false);
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetButtonDown ("Schematic")) {

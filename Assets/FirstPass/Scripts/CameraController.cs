@@ -2,22 +2,24 @@
 using System.Collections;
 
 public class CameraController : MonoBehaviour {
-	public float speed;
+	[SerializeField] float padding = 3f;
+	[SerializeField] GameObject player;
 
-	private Rigidbody cameraRigidbody;
-
-	// Use this for initialization
-	void Start () {
-		cameraRigidbody = GetComponent<Rigidbody> ();
-	}
+	private Vector3 offset;
 	
+	void Awake()
+	{
+		offset = transform.position;
+		if (player == null)
+			player = GameObject.FindGameObjectWithTag ("Player");
+	}
+
 	// Update is called once per frame
 	void FixedUpdate () {
-		float horizontal = Input.GetAxisRaw ("Horizontal");
-		float vertical = Input.GetAxisRaw ("Vertical");
-		Vector3 movement = new Vector3 (horizontal, 0f, vertical);
-		movement.Normalize ();
-
-		cameraRigidbody.MovePosition (transform.position + movement * speed * Time.deltaTime);
+		Vector3 newPos = player.transform.position + offset;
+		Vector3 dir = newPos - transform.position;
+		float distance = dir.magnitude - padding;
+		if (distance > 0)
+			transform.position = Vector3.MoveTowards (transform.position, newPos, distance);
 	}
 }

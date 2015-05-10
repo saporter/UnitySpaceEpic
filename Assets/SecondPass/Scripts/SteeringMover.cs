@@ -19,13 +19,13 @@ public class SteeringMover : MonoBehaviour, IMover {
 
 	void Awake () {
 		rigidBody = GetComponent<Rigidbody> ();
-		/* Change how this works... */
-		//Engines = GetComponentInChildren<IEngine> ();
-		/* End Change */
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		if (_engines == null)
+			return;
+
 		float change = throttleChange ();
 		if (change != 0f) {
 			currentStage += change;

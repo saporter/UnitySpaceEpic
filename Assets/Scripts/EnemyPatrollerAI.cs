@@ -64,7 +64,7 @@ public class EnemyPatrollerAI : MonoBehaviour, IMover, IShooter {
 	{
 		time += Time.deltaTime;
 		if (time % 4 < 1f && _primary != null) {
-			_primary.FireButtonDown (target.transform.position, null);
+			_primary.FireButtonDown (target.transform.position);
 			pFire = true;
 		} else if (pFire) {
 			_primary.FireButtonUp();
@@ -72,7 +72,7 @@ public class EnemyPatrollerAI : MonoBehaviour, IMover, IShooter {
 		}
 		
 		if (time % 4 > 2f && time % 4 < 3f && _secondary != null) {
-			_secondary.FireButtonDown (target.transform.position, null);
+			_secondary.FireButtonDown (target.transform.position);
 			sFire = true;
 		}else if (sFire) {
 			_secondary.FireButtonUp();

@@ -37,7 +37,7 @@ public class MouseShooter : MonoBehaviour, IShooter {
 			if (target.HasValue) 
 			{
 				primaryUp = true;
-				_primary.FireButtonDown(target.Value, null);
+				_primary.FireButtonDown(target.Value);
 			}
 		}else if(primaryUp && _primary != null){
 			primaryUp = false;
@@ -50,7 +50,7 @@ public class MouseShooter : MonoBehaviour, IShooter {
 			if (target.HasValue) 
 			{
 				secondaryUp = true;
-				_secondary.FireButtonDown(target.Value, null);
+				_secondary.FireButtonDown(target.Value);
 			}
 		}else if(secondaryUp && _secondary != null){
 			secondaryUp = false;

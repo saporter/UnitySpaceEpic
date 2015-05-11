@@ -14,6 +14,12 @@ public class SlotController : MonoBehaviour, IDropHandler {
 		Events.instance.AddListener<EndContainerDragEvent> (OnEndDrag);
 	}
 
+	void OnDestroy()
+	{
+		Events.instance.RemoveListener<BeginContainerDragEvent> (OnBeginDrag);
+		Events.instance.RemoveListener<EndContainerDragEvent> (OnEndDrag);
+	}
+
 	#region IDropHandler implementation
 
 	public void OnDrop (PointerEventData eventData)

@@ -43,6 +43,11 @@ public class Chassis : MonoBehaviour, IChassis, IDamageable {
 
 	}
 
+	void OnDestroy()
+	{
+		Events.instance.RemoveListener<ContainerChangedEvent> (moduleInstalled);
+	}
+
 	void moduleInstalled(ContainerChangedEvent e)
 	{
 		if (e.OldSlot != null && e.OldSlot.GetComponent<IModuleSlot> () != null) {

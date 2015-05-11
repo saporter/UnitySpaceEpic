@@ -38,12 +38,12 @@ public class LaserWeapon : MonoBehaviour, IWeapon {
 	#region IWeapon implementation
 	public string Name { get { return "Laser"; } }
 
-	public bool FireButtonDown (IDamageable target, IShipSystems systems)
+	public bool FireButtonDown (IDamageable target)
 	{
 		throw new System.NotImplementedException ();
 	}
 
-	public bool FireButtonDown (Vector3 target, IShipSystems systems)
+	public bool FireButtonDown (Vector3 target)
 	{
 		if(!beamEffect.enabled) beamEffect.enabled = true;
 

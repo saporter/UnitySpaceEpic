@@ -5,19 +5,17 @@ public class OrbitMover : MonoBehaviour {
 	private bool stillRotating = false;
 
 	public float speed = 6f;
-	public float rotationSpeed = 180f;
-	public IShipSystems systems;			
+	public float rotationSpeed = 180f;		
 	public LayerMask floorMask;
 
 	void Awake()
 	{
-		systems = GetComponent<IShipSystems> ();
 		GetComponent<Rigidbody> ().isKinematic = true;
 	}
 
 	public void Move(Vector3 toPoint)
 	{
-		Vector3 around = systems.Target == null ? transform.position : systems.Target.transform.position;
+		Vector3 around = transform.position;
 		toPoint.Set (toPoint.x, transform.position.y, toPoint.z);
 
 		StartCoroutine(Orbit(around, toPoint));
@@ -41,7 +39,6 @@ public class OrbitMover : MonoBehaviour {
 			
 			if (Physics.Raycast (camRay, out floorHit, 300f, floorMask)) 
 			{
-				systems.Target = GameObject.FindWithTag("Enemy");
 				Events.instance.Raise(new MovementMarkerPlacedEvent(floorHit.point));
 				Move(floorHit.point);
 			}

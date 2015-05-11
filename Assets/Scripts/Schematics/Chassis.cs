@@ -73,4 +73,9 @@ public class Chassis : MonoBehaviour, IChassis, IDamageable {
 	}
 	
 	#endregion
+
+	void OnCollisionExit()
+	{
+		GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+	}
 }

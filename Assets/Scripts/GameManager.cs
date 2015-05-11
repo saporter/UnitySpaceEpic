@@ -12,6 +12,12 @@ public class GameManager : MonoBehaviour {
 	void Start()
 	{
 		GameObject.FindGameObjectWithTag ("Player").GetComponent<IChassis> ().SchematicUIClone.transform.SetParent (gameMenu.transform, false);
+		Events.instance.AddListener<ShipDamagedEvent> (ShipDamaged);
+	}
+
+	void OnDestroy()
+	{
+		Events.instance.RemoveListener<ShipDamagedEvent> (ShipDamaged);
 	}
 
 	// Update is called once per frame
@@ -38,5 +44,12 @@ public class GameManager : MonoBehaviour {
 	private void UnPause()
 	{
 		Time.timeScale = 1f;
+	}
+
+	void ShipDamaged(ShipDamagedEvent e)
+	{
+		if (e.Ship.tag == "Player" && e.Ship.GetComponent<IDamageable>().CurrentHealth < 0f) {
+			Destroy(e.Ship.GetComponent<IChassis>().SchematicUIClone);
+		}
 	}
 }

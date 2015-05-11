@@ -45,6 +45,7 @@ public class SteeringMover : MonoBehaviour, IMover {
 		float dir = directionChange ();
 		if (dir != 0) {
 			Vector3 rot = rigidBody.rotation.eulerAngles;
+			rigidBody.angularVelocity = Vector3.zero;
 			rigidBody.rotation = Quaternion.Euler(rot.x, rot.y + dir * _engines.RotationSpeed, rot.z); 
 			rigidBody.velocity = currentStage > 0 ? transform.forward * rigidBody.velocity.magnitude : transform.forward * -rigidBody.velocity.magnitude;
 		}
@@ -72,7 +73,6 @@ public class SteeringMover : MonoBehaviour, IMover {
 	}
 
 	void OnCollisionExit(){
-		rigidBody.angularVelocity = Vector3.zero;
 		if (_engines == null)
 			return;
 		currentStage = currentStage > 0 ? rigidBody.velocity.magnitude / _engines.MaxSpeed : -rigidBody.velocity.magnitude / _engines.MaxSpeed;

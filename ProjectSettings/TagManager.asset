@@ -5,8 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Boundary
-  - GameMenu
+  - Game Menu
   - UI
+  - Ship Menu
+  - Map Menu
+  - Docked Menu
   layers:
   - Default
   - TransparentFX

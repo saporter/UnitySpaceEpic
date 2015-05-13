@@ -43,9 +43,16 @@ public class EnemyPatrollerAI : MonoBehaviour, IMover, IShooter {
 	void Awake()
 	{
 		Events.instance.AddListener<ShipDamagedEvent> (EngagedByEnemy);
+		Events.instance.AddListener<PlayerDockedEvent> (TargetDocked);
 		patrolPoint = transform.position;
-		target = GameObject.FindGameObjectWithTag ("Player");
+		TargetDocked (new PlayerDockedEvent (false));
 		rigidBody = GetComponent<Rigidbody> ();
+	}
+
+	void OnDestroy()
+	{
+		Events.instance.RemoveListener<ShipDamagedEvent> (EngagedByEnemy);
+		Events.instance.RemoveListener<PlayerDockedEvent> (TargetDocked);
 	}
 
 	void FixedUpdate()
@@ -141,5 +148,15 @@ public class EnemyPatrollerAI : MonoBehaviour, IMover, IShooter {
 		if (target == null)
 			return;
 		targetLastSeen = target.transform.position;
+	}
+
+	void TargetDocked (PlayerDockedEvent e)
+	{
+		if (e.playerDocked) {
+			target = null;
+			targetLastSeen = null;
+		}
+		else
+			target = GameObject.FindGameObjectWithTag ("Player");
 	}
 }

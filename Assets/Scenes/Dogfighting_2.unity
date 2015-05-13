@@ -430,7 +430,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 443268, guid: 92daedd8557c2534d8b078075bed6df7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 443268, guid: 92daedd8557c2534d8b078075bed6df7, type: 2}
       propertyPath: m_LocalPosition.y
@@ -438,7 +438,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 443268, guid: 92daedd8557c2534d8b078075bed6df7, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: -8
       objectReference: {fileID: 0}
     - target: {fileID: 443268, guid: 92daedd8557c2534d8b078075bed6df7, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1072,6 +1072,10 @@ Prefab:
       propertyPath: m_Name
       value: Player (Capsule Fighter)
       objectReference: {fileID: 0}
+    - target: {fileID: 131678, guid: abc8c7bc7c11e2c4798c1bfbf6e59d16, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: abc8c7bc7c11e2c4798c1bfbf6e59d16, type: 2}
   m_IsPrefabParent: 0
@@ -1638,6 +1642,48 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22430388, guid: 869a1728d9222c8448a3b718072a6dad,
     type: 2}
   m_PrefabInternal: {fileID: 1333659800}
+--- !u!1001 &1334377158
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 457890, guid: b312ae773fb2984489a466e91cf370f9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457890, guid: b312ae773fb2984489a466e91cf370f9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457890, guid: b312ae773fb2984489a466e91cf370f9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457890, guid: b312ae773fb2984489a466e91cf370f9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457890, guid: b312ae773fb2984489a466e91cf370f9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457890, guid: b312ae773fb2984489a466e91cf370f9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 457890, guid: b312ae773fb2984489a466e91cf370f9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 457890, guid: b312ae773fb2984489a466e91cf370f9, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b312ae773fb2984489a466e91cf370f9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1583960456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,7 +2009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1809166248
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1997,7 +2043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .551470578, g: .48071906, b: .0851535574, a: .90196079}
+  m_Color: {r: .551470578, g: .48071906, b: .0851535574, a: .717647076}
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -2055,6 +2101,14 @@ Prefab:
     - target: {fileID: 489060, guid: b878218d71e5741b79db0f63a8f65c88, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11403686, guid: b878218d71e5741b79db0f63a8f65c88, type: 2}
+      propertyPath: padding
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057012, guid: b878218d71e5741b79db0f63a8f65c88, type: 2}
+      propertyPath: orthographic size
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b878218d71e5741b79db0f63a8f65c88, type: 2}

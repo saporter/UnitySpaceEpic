@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!121 &12100000
+Flare:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: SunFlare Yellow
+  m_FlareTexture: {fileID: 2800000, guid: 857b0adf7ae8cc14f828ca4af115a378, type: 3}
+  m_TextureLayout: 1
+  m_Elements:
+  - m_ImageIndex: 9
+    m_Position: 0
+    m_Size: 47.6338844
+    m_Color: {r: .25373137, g: 0, b: 0, a: 1}
+    m_UseLightColor: 0
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 1
+  - m_ImageIndex: 9
+    m_Position: -.374973983
+    m_Size: 26.5554447
+    m_Color: {r: .254901975, g: 0, b: 0, a: 1}
+    m_UseLightColor: 1
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 1
+  - m_ImageIndex: 3
+    m_Position: .175102144
+    m_Size: 23.2899113
+    m_Color: {r: .0895522237, g: 0, b: .0845423192, a: 1}
+    m_UseLightColor: 0
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 1
+  - m_ImageIndex: 0
+    m_Position: .0952996612
+    m_Size: 28.942709
+    m_Color: {r: .567164183, g: .440246314, b: 0, a: 1}
+    m_UseLightColor: 0
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 1
+  - m_ImageIndex: 5
+    m_Position: -.297508866
+    m_Size: 18.6811562
+    m_Color: {r: .0671641827, g: .0295898151, b: 0, a: 1}
+    m_UseLightColor: 0
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 1
+  - m_ImageIndex: 60
+    m_Position: -.204629406
+    m_Size: -4.06436396
+    m_Color: {r: .23880595, g: .0851685554, b: 0, a: 1}
+    m_UseLightColor: 0
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 1
+  - m_ImageIndex: 38
+    m_Position: -.169705659
+    m_Size: 1.48708463
+    m_Color: {r: 0, g: .0245277192, b: .074626863, a: 1}
+    m_UseLightColor: 0
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 1
+  - m_ImageIndex: 5
+    m_Position: .235682696
+    m_Size: -15.2101603
+    m_Color: {r: .022388041, g: .0136230327, b: .0021719737, a: 1}
+    m_UseLightColor: 0
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 1
+  - m_ImageIndex: 38
+    m_Position: 0
+    m_Size: 3.46514583
+    m_Color: {r: .156716406, g: .156716406, b: .156716406, a: 1}
+    m_UseLightColor: 1
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 1
+  - m_ImageIndex: 5
+    m_Position: -.190566421
+    m_Size: 4.67775583
+    m_Color: {r: 0, g: .0156862754, b: .105882354, a: 1}
+    m_UseLightColor: 0
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 1
+  - m_ImageIndex: 38
+    m_Position: .802337766
+    m_Size: 26.1743088
+    m_Color: {r: 0, g: .0156037882, b: .097014904, a: 1}
+    m_UseLightColor: 1
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 1
+  - m_ImageIndex: 0
+    m_Position: .0600000098
+    m_Size: 44.9913406
+    m_Color: {r: .50746268, g: .180983201, b: 0, a: 1}
+    m_UseLightColor: 0
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 1
+  m_UseFog: 0
+--- !u!1002 &12100001
+EditorExtensionImpl:
+  serializedVersion: 6

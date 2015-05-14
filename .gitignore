@@ -9,8 +9,10 @@
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
-Assets/Third Party Assets/FORGE3D
-Assets/Third Party Assets/FORGE3D.meta
+
+#Anything new after and including FORGE3D Planets, ignore
+Assets/Third Party Assets/
+
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #

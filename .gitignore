@@ -10,8 +10,11 @@
 [Oo]bj/
 [Bb]uild/
 
-#Anything new after and including FORGE3D Planets, ignore
-Assets/Third Party Assets/
+#Ignore all assets from FORGE3D/Planets except Scripts folder
+!Assets/Third Party Assets/FORGE3D/Planets
+
+Assets/Third Party Assets/FORGE3D/Planets/*
+!Assets/Third Party Assets/FORGE3D/Planets/Scripts/
 
 
 # ===================================== #

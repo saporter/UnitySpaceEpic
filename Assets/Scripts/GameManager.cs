@@ -23,7 +23,9 @@ public class GameManager : MonoBehaviour {
 
 	void Start()
 	{
-		GameObject.FindGameObjectWithTag ("Player").GetComponent<IChassis> ().SchematicUIClone.transform.SetParent (shipMenu.transform.GetChild(0).transform, false);
+		GameObject schematic = GameObject.FindGameObjectWithTag ("Player").GetComponent<IChassis> ().SchematicUIClone;
+		//schematic.transform.position = Vector3.zero;
+		schematic.transform.SetParent (shipMenu.transform.GetChild(0).transform, false);
 
 	}
 

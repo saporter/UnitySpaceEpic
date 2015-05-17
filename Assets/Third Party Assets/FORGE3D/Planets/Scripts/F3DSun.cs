@@ -35,6 +35,7 @@ public class F3DSun : MonoBehaviour
 
         for (int n = 1; n < ShadowCasters + 1; n++)
             shadowCasterRef[n - 1] = Shader.PropertyToID("_ShadowCasterPos_" + n.ToString());
+
     }
 
     // Update is called once per frame

@@ -69,6 +69,7 @@ public class F3DSunEditor : Editor
         myTarget.EnableSoftShadow = EditorGUILayout.Toggle("Enable soft shadows", myTarget.EnableSoftShadow);        
         myTarget.shadowStrength = EditorGUILayout.Slider("Shadow strength:", myTarget.shadowStrength, 0.0f, 1.0f);
         myTarget.radius = EditorGUILayout.Slider("Sun radius:", myTarget.radius, 0.1f, 5f);
+		myTarget.RotationRate = EditorGUILayout.FloatField("Rotation Rate:", myTarget.RotationRate);
 
 
         EditorGUILayout.EndVertical();

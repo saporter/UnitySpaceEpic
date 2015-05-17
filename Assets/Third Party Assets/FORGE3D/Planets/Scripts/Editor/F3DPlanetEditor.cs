@@ -54,7 +54,7 @@ public class F3DPlanetEditor : Editor
         myTarget.OrbitPoint = (Transform)EditorGUILayout.ObjectField("Orbit around point:", myTarget.OrbitPoint, typeof(Transform), true);
         EditorGUILayout.EndVertical();
 
-        myTarget.OrbitRate = EditorGUILayout.FloatField("Orbit rate:", myTarget.OrbitRate);
+        myTarget.OrbitRate = EditorGUILayout.FloatField("Orbit rate (radians / s):", myTarget.OrbitRate);
         myTarget.RotationRate = EditorGUILayout.FloatField("Local rotation:", myTarget.RotationRate);
 
         myTarget.ShowOrbit = EditorGUILayout.Toggle("Show trajectory", myTarget.ShowOrbit);

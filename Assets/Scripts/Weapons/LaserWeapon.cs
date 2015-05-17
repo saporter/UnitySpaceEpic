@@ -21,6 +21,7 @@ public class LaserWeapon : MonoBehaviour, IWeapon {
 		if(damageEffect == null)
 			Debug.Log ("No damage effect added for " + name + " under parent " + transform.parent != null ? transform.parent.name : "<none>");
 		beamEffect.enabled = false;
+		beamEffect.useWorldSpace = false;
 
 		//coll = transform.parent.gameObject.GetComponent<Collider> ();
 		aperture = transform;
@@ -45,7 +46,10 @@ public class LaserWeapon : MonoBehaviour, IWeapon {
 
 	public bool FireButtonDown (Vector3 target)
 	{
-		if(!beamEffect.enabled) beamEffect.enabled = true;
+		if (!beamEffect.enabled) { 
+			beamEffect.useWorldSpace = true;
+			beamEffect.enabled = true;
+		}
 
 		//Vector3 source = coll.ClosestPointOnBounds (target);
 		//Vector3 source = aperture.position;
@@ -78,6 +82,7 @@ public class LaserWeapon : MonoBehaviour, IWeapon {
 		beamEffect.SetPosition (0, aperture.position);
 		beamEffect.SetPosition (1, aperture.position);
 		beamEffect.enabled = false;
+		beamEffect.useWorldSpace = false;
 		StopDamageEffect ();
 	}
 

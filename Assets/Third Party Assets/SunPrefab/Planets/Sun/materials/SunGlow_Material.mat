@@ -71,7 +71,7 @@ Material:
       data:
         first:
           name: _Shininess
-        second: .0986567214
+        second: .0909999982
       data:
         first:
           name: _Parallax
@@ -100,11 +100,11 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .417910457, g: .0628611818, b: 0, a: 1}
+        second: {r: .417916477, g: .0628652945, b: 0, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: 1, g: .985805213, b: .74626863, a: 0}
+        second: {r: 1, g: .98580569, b: .746275663, a: 0}
       data:
         first:
           name: _Emission

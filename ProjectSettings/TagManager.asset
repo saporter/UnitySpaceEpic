@@ -10,6 +10,7 @@ TagManager:
   - Ship Menu
   - Map Menu
   - Docked Menu
+  - GameMenu
   layers:
   - Default
   - TransparentFX
@@ -25,8 +26,8 @@ TagManager:
   - Selection
   - Ship
   - ShipModule
-  - 
-  - 
+  - FogOfWar
+  - FogOfWarMask
   - 
   - 
   - 

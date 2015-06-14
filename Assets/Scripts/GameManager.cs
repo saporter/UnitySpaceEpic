@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour {
 		GameObject schematic = GameObject.FindGameObjectWithTag ("Player").GetComponent<IChassis> ().SchematicUIClone;
 		//schematic.transform.position = Vector3.zero;
 		schematic.transform.SetParent (shipMenu.transform.GetChild(0).transform, false);
-
 	}
 
 	void OnDestroy()
@@ -38,6 +37,8 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		if (Input.GetButtonDown ("Game Menu")) {
 			ToggleGameMenu ();
+			if(gameMenu.activeSelf)
+				gameMenu.transform.GetChild(gameMenu.transform.childCount - 1).GetComponentInChildren<Button>().onClick.Invoke();
 		} else if (Input.GetButtonDown ("Ship Menu")) {
 			ToggleGameMenu (true);
 			shipMenu.transform.GetChild (1).GetComponentInChildren<Button> ().onClick.Invoke ();

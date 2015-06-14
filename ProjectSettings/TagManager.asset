@@ -11,6 +11,8 @@ TagManager:
   - Map Menu
   - Docked Menu
   - GameMenu
+  - Map Canvas
+  - Aperture Mask
   layers:
   - Default
   - TransparentFX
@@ -28,7 +30,7 @@ TagManager:
   - ShipModule
   - FogOfWar
   - FogOfWarMask
-  - 
+  - Map
   - 
   - 
   - 

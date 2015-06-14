@@ -23,8 +23,6 @@ public class EnableOnCollision : MonoBehaviour {
 				SetChildrenActive(true);
 			}
 
-
-			Debug.Log("Map Enablers entered: " + counter);
 		}
 	}
 
@@ -34,7 +32,6 @@ public class EnableOnCollision : MonoBehaviour {
 			if(--counter <= 0){
 				SetChildrenActive(false);
 			}
-			Debug.Log("Map Enablers left: " + counter);
 		}
 	}
 

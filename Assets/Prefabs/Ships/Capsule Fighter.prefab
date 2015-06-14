@@ -118,9 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f3b7f7bf44c274dbf07109f9cf2cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 20
   Schematic: {fileID: 117292, guid: 32ad07d7ca4e4e34db53ece35cddb936, type: 2}
   DestroyedEffect: {fileID: 100008, guid: a93496017806b7740910df5fd946f306, type: 2}
-  MaxHealth: 20
 --- !u!114 &11441812
 MonoBehaviour:
   m_ObjectHideFlags: 1

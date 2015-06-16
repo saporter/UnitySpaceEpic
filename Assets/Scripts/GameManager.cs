@@ -24,17 +24,18 @@ public class GameManager : MonoBehaviour {
 	void Start()
 	{
 		GameObject schematic = GameObject.FindGameObjectWithTag ("Player").GetComponent<IChassis> ().SchematicUIClone;
-		//schematic.transform.position = Vector3.zero;
 		schematic.transform.SetParent (shipMenu.transform.GetChild(0).transform, false);
 	}
 
 	void OnDestroy()
 	{
 		Events.instance.RemoveListener<ShipDamagedEvent> (ShipDamaged);
+		Events.instance.RemoveListener<PlayerDockedEvent> (PlayerDockedOrExit);
 	}
 
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log ("Time.timeScale: " + Time.timeScale + " | Time.fixedDeltaTime: " + Time.fixedDeltaTime + " | Time.deltaTime: " + Time.deltaTime + " | Time.fixedTime: " + Time.fixedTime);
 		if (Input.GetButtonDown ("Game Menu")) {
 			ToggleGameMenu ();
 			if(gameMenu.activeSelf)

@@ -16,17 +16,17 @@ public class CameraController : MonoBehaviour {
 			player = GameObject.FindGameObjectWithTag ("Player");
 	}
 
-	// Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate()
+	{
 		if (player == null)
 			return;
-
+		
 		Vector3 newPos = player.transform.position + offset;
 		Vector3 dir = newPos - transform.position;
 		float distance = dir.magnitude - padding;
 		if (distance > 0)
 			transform.position = Vector3.MoveTowards (transform.position, newPos, distance);
-
+		
 		float zoom = -Input.GetAxisRaw ("Mouse ScrollWheel");
 		zoom = zoom > 0f ? 1f : zoom < 0f ? -1f : 0f;		// Why doesn't GetAxisRaw return +-1 for "Mouse ScrollWheel"???
 		if (zoom != 0) {
@@ -36,4 +36,5 @@ public class CameraController : MonoBehaviour {
 			else if(c.orthographicSize > minZoom) c.orthographicSize = minZoom;
 		}
 	}
+
 }

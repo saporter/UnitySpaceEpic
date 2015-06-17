@@ -13,6 +13,7 @@ TagManager:
   - GameMenu
   - Map Canvas
   - Aperture Mask
+  - Map Canvas (text)
   layers:
   - Default
   - TransparentFX

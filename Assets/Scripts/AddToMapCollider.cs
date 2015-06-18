@@ -34,7 +34,7 @@ public class AddToMapCollider : MonoBehaviour {
 
 		 if(other.gameObject.tag == "Aperture Mask"){
 
-			Debug.Log("Adding map element for " + gameObject.name);
+			//Debug.Log("Adding map element for " + gameObject.name);
 			GameObject clone = Instantiate(mapElement) as GameObject;
 			clone.transform.SetParent(mapCanvas.transform, false);
 			clone.GetComponent<IMappable>().FollowGameObject = gameObject;

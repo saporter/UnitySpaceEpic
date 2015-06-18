@@ -58,49 +58,13 @@ public class MapCameraController : MonoBehaviour, IMapCamera {
 		// Start listening coroutine for player map input
 		if (listener != null)
 			StopCoroutine (listener);
-		listener = StartCoroutine (ListenForInput ());
+
+		// listening routine on MapScreen
+		listener = StartCoroutine (MapScreen.GetComponent<ICameraInputListenable>().ListenForInput (GetComponent<Camera>(), MapUI.transform.parent, MapUI.transform, zoomSpeed, minSize, maxSize));
 	}
 
 	#endregion
 
 
 
-
-	IEnumerator ListenForInput ()
-	{
-		Transform menu = MapUI.transform.parent;
-		float zoom;
-		float deltaTime = Time.realtimeSinceStartup;
-
-		// Listen for player input while Map is shown
-		while (menu.gameObject.activeInHierarchy && menu.GetChild(menu.childCount - 1) == MapUI.transform) {
-			zoom = -Input.GetAxisRaw ("Mouse ScrollWheel");
-			zoom = zoom > 0f ? 1f : zoom < 0f ? -1f : 0f;		// Why doesn't GetAxisRaw return +-1 for "Mouse ScrollWheel"???
-
-			// If scrollwheel input, zoom by changing orthographic camera size.
-			if (zoom != 0) {
-				Camera c = GetComponent<Camera> ();
-				deltaTime = Time.realtimeSinceStartup - deltaTime;	// Cannot use Time.deltatime since game is paused via Time.timescale = 0.0 
-				float old = c.orthographicSize;
-				c.orthographicSize += zoom * zoomSpeed * deltaTime;
-				if(c.orthographicSize < minSize) c.orthographicSize = minSize;
-				else if(c.orthographicSize > maxSize) c.orthographicSize = maxSize;
-
-				// Yield one frame to allow camera screen to update...
-				yield return new WaitForEndOfFrame();
-				// ...so anyone who listens for event will have updated camera position
-				Events.instance.Raise(new MapMovedEvent(c.orthographicSize, old));
-			}
-
-			// Record realtimeSinceStartup b/c we cannot use Time.deltatime since game is paused via Time.timescale = 0.0
-			deltaTime = Time.realtimeSinceStartup;
-
-			// Yield to next frame.  Time.timescale = 0.0 forces us to use WaitForEndOfFrame IOT receive a call back.
-			yield return new WaitForEndOfFrame();
-		}
-
-		// Remove this eventually
-		Debug.Log("Exiting: " + menu.GetChild(menu.childCount - 1).gameObject.name);
-
-	}
 }

@@ -22,6 +22,25 @@ public class MapCameraController : MonoBehaviour, IMapCamera {
 			Debug.LogError ("MapUI is null in " + gameObject.name + ". Assign MapUI to the Map tap GameObject in Game Menu.");
 	}
 
+	void Start()
+	{
+		LoadVars ();
+	}
+
+	void LoadVars()
+	{
+		IXmlLoader XmlLoader = GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IXmlLoader>();
+		
+		if (!XmlLoader.FloatVars.TryGetValue ("MapCameraController.Padding", out padding))
+			Debug.LogError ("Could not find MapCameraController.Padding from XmlLoader");
+		if (!XmlLoader.FloatVars.TryGetValue ("MapCameraController.MaxSize", out maxSize))
+			Debug.LogError ("Could not find MapCameraController.MaxSize from XmlLoader");
+		if (!XmlLoader.FloatVars.TryGetValue ("MapCameraController.MinSize", out minSize))
+			Debug.LogError ("Could not find MapCameraController.MinSize from XmlLoader");
+		if (!XmlLoader.FloatVars.TryGetValue ("MapCameraController.ZoomSpeed", out zoomSpeed))
+			Debug.LogError ("Could not find MapCameraController.ZoomSpeed from XmlLoader");
+	}
+
 	// Center map over player IAW padding tolerance
 	void SnapToPlayer()
 	{

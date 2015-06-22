@@ -128,6 +128,8 @@ public class EnemyPatrollerAI : MonoBehaviour, IMover, IShooter {
 
 	void RotateToward (Vector3 direction)
 	{
+		if (direction == Vector3.zero)
+			return;
 		transform.rotation = Quaternion.Lerp (transform.rotation,  Quaternion.LookRotation(direction), Time.fixedDeltaTime * (_engines != null ? _engines.RotationSpeed : 0f));
 	}
 

@@ -4,9 +4,9 @@ using System.Linq;
 
 public class LaserWeapon : MonoBehaviour, IWeapon {
 
-	public float maxDistance = 10f;
-	public float maxCharge = 1.5f;
-	public float damagePerSecond = 7f;
+	[SerializeField] float maxDistance = 10f;
+	[SerializeField] float maxCharge = 1.5f;
+	[SerializeField] float damagePerSecond = 7f;
 	public LineRenderer beamEffect;
 	public GameObject damageEffect;
 
@@ -29,11 +29,26 @@ public class LaserWeapon : MonoBehaviour, IWeapon {
 		damageEffect.transform.parent = this.transform;
 		damageEffect.SetActive (false);
 		shipMask = 1 << LayerMask.NameToLayer ("Ship");
+
+
 	}
 
 	void Start()
 	{
+		// Data values from XML
+		LoadVars ();
+	}
 
+	void LoadVars()
+	{
+		IXmlLoader XmlLoader = GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IXmlLoader>();
+
+		if (!XmlLoader.FloatVars.TryGetValue ("LaserWeapon.MaxDistance", out maxDistance))
+			Debug.LogError ("Could not find LaserWeapon.MaxDistance from XmlLoader");
+		if (!XmlLoader.FloatVars.TryGetValue ("LaserWeapon.MaxCharge", out maxCharge))
+			Debug.LogError ("Could not find LaserWeapon.MaxCharge from XmlLoader");
+		if (!XmlLoader.FloatVars.TryGetValue ("LaserWeapon.DamagePerSecond", out damagePerSecond))
+			Debug.LogError ("Could not find LaserWeapon.DamagePerSecond from XmlLoader");
 	}
 
 	#region IWeapon implementation

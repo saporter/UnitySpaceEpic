@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<game-values>
+	<class name="LaserWeapon">
+		<members>
+			<float name="MaxDistance">15</float>
+			<float name="MaxCharge">1.5</float>
+			<float name="DamagePerSecond">7</float>
+		</members>
+	</class>
+	<class name="StandardEngine">
+		<members>
+			<float name="MaxSpeed">6</float>
+			<float name="RotationSpeed">3</float>
+			<float name="ReversePenalty">0.5</float>
+			<float name="Acceleration">1</float>
+		</members>
+	</class>
+	<class name="Chassis">
+		<members>
+			<float name="MaxHealth">20</float>
+		</members>
+	</class>
+	<class name="SteeringMover">
+		<members>
+			<float name="ThrustStages">2</float>
+		</members>
+	</class>
+	<class name="MapCameraController">
+		<members>
+			<float name="Padding">300</float>
+			<float name="MaxSize">1000</float>
+			<float name="MinSize">300</float>
+			<float name="ZoomSpeed">5000</float>
+		</members>
+	</class>
+	<class name="CameraController">
+		<members>
+			<float name="Padding">2</float>
+			<float name="MinZoom">10</float>
+			<float name="MaxZoom">5</float>
+		</members>
+	</class>
+</game-values>

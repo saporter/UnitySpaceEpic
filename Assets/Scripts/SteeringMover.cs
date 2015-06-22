@@ -24,6 +24,19 @@ public class SteeringMover : MonoBehaviour, IMover {
 	void Awake () {
 		rigidBody = GetComponent<Rigidbody> ();
 	}
+
+	void Start()
+	{
+		LoadVars ();
+	}
+
+	void LoadVars()
+	{
+		IXmlLoader XmlLoader = GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IXmlLoader>();
+		
+		if (!XmlLoader.FloatVars.TryGetValue ("SteeringMover.ThrustStages", out thrustStages))
+			Debug.LogError ("Could not find SteeringMover.ThrustStages from XmlLoader");
+	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {

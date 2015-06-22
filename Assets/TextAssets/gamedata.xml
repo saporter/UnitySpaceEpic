@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<levels>
+	<level>
+		<name>Level 1</name>
+		<tutorial>This is the first tutorial</tutorial>
+		<object name="Cube">1</object>
+		<object name="Cylinder">2</object>
+		<object name="Capsule">3</object>
+		<object name="Sphere">4</object>
+		<finaltext>End of level 1</finaltext>
+	</level>
+	<level>
+		<name>Level 2</name>
+		<tutorial>And now the second tutorial</tutorial>
+		<object name="Cube">11</object>
+		<object name="Cylinder">12</object>
+		<object name="Capsule">13</object>
+		<object name="Sphere">14</object>
+		<finaltext>The end of level 2</finaltext>
+	</level>
+</levels>

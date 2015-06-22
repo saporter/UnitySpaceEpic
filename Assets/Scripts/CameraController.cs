@@ -15,6 +15,22 @@ public class CameraController : MonoBehaviour {
 		if (player == null)
 			player = GameObject.FindGameObjectWithTag ("Player");
 	}
+	void Start()
+	{
+		LoadVars ();
+	}
+	
+	void LoadVars()
+	{
+		IXmlLoader XmlLoader = GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IXmlLoader>();
+		
+		if (!XmlLoader.FloatVars.TryGetValue ("CameraController.Padding", out padding))
+			Debug.LogError ("Could not find CameraController.Padding from XmlLoader");
+		if (!XmlLoader.FloatVars.TryGetValue ("CameraController.MinZoom", out minZoom))
+			Debug.LogError ("Could not find CameraController.MinZoom from XmlLoader");
+		if (!XmlLoader.FloatVars.TryGetValue ("CameraController.MaxZoom", out maxZoom))
+			Debug.LogError ("Could not find CameraController.MaxZoom from XmlLoader");
+	}
 
 	void FixedUpdate()
 	{

@@ -38,9 +38,20 @@ public class Chassis : MonoBehaviour, IChassis, IDamageable {
 			m.ShipGameObject = this.gameObject;
 			m.UpdateShip();
 		}
+	}
 
+	void Start()
+	{
+		LoadVars ();
 		_currentHealth = _maxHealth;
+	}
 
+	void LoadVars()
+	{
+		IXmlLoader XmlLoader = GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IXmlLoader>();
+
+		if (!XmlLoader.FloatVars.TryGetValue ("Chassis.MaxHealth", out _maxHealth))
+			Debug.LogError ("Could not find Chassis.MaxHealth from XmlLoader");
 	}
 
 	void OnDestroy()

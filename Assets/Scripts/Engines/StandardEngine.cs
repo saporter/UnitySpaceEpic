@@ -22,4 +22,23 @@ public class StandardEngine : MonoBehaviour, IEngine {
 	public float Acceleration { get { return _acceleration; } }
 
 	#endregion
+
+	void Start()
+	{
+		LoadVars ();
+	}
+
+	void LoadVars()
+	{
+		IXmlLoader XmlLoader = GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IXmlLoader>();
+		
+		if (!XmlLoader.FloatVars.TryGetValue ("StandardEngine.MaxSpeed", out _maxSpeed))
+			Debug.LogError ("Could not find StandardEngine.MaxSpeed from XmlLoader");
+		if (!XmlLoader.FloatVars.TryGetValue ("StandardEngine.RotationSpeed", out _rotationSpeed))
+			Debug.LogError ("Could not find StandardEngine.RotationSpeed from XmlLoader");
+		if (!XmlLoader.FloatVars.TryGetValue ("StandardEngine.ReversePenalty", out _reversePenalty))
+			Debug.LogError ("Could not find StandardEngine.ReversePenalty from XmlLoader");
+		if (!XmlLoader.FloatVars.TryGetValue ("StandardEngine.Acceleration", out _acceleration))
+			Debug.LogError ("Could not find StandardEngine.Acceleration from XmlLoader");
+	}
 }

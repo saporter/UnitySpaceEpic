@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour {
 		} else if (Input.GetButtonDown ("Map Menu")) {
 			ToggleGameMenu (true);
 			mapMenu.transform.GetChild (1).GetComponentInChildren<Button> ().onClick.Invoke ();
+			Events.instance.Raise(new MapOpennedEvent());
 		} else if (Input.GetButtonDown ("Docked Menu")) {
 			ToggleGameMenu (true);
 			dockedMenu.transform.GetChild (1).GetComponentInChildren<Button> ().onClick.Invoke ();

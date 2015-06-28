@@ -9,9 +9,9 @@ public class ClearAndLoadFOW : MonoBehaviour {
 
 	Camera c;
 
-	void Awake () {
-		Events.instance.AddListener<MapOpennedEvent> (MapOpenned);
-	}
+//	void Awake () {
+//		Events.instance.AddListener<MapOpennedEvent> (MapOpenned);
+//	}
 
 	// Use this for initialization
 	void Start () {
@@ -21,14 +21,14 @@ public class ClearAndLoadFOW : MonoBehaviour {
 		StartCoroutine (ClearAndLoad ());
 	}
 	
-	void OnDestroy(){
-		Events.instance.RemoveListener<MapOpennedEvent> (MapOpenned);
-	}
-
-	void MapOpenned(MapOpennedEvent e)
-	{
-		SaveMap ();
-	}
+//	void OnDestroy(){
+//		Events.instance.RemoveListener<MapOpennedEvent> (MapOpenned);
+//	}
+//
+//	void MapOpenned(MapOpennedEvent e)
+//	{
+//		SaveMap ();
+//	}
 
 
 	void SaveMap()
@@ -61,7 +61,7 @@ public class ClearAndLoadFOW : MonoBehaviour {
 		GetComponent<Camera> ().clearFlags = CameraClearFlags.Depth;
 
 		// Load old map
-		LoadMap ();
+		//LoadMap ();
 		yield return new WaitForEndOfFrame ();
 	}
 

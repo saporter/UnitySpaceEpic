@@ -2,28 +2,47 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
-	[SerializeField] GameObject gameMenu;
+public class GameManager : MonoBehaviour, IGameManager {
+	private static IGameManager _instance;
 
-	GameObject shipMenu;
-	GameObject mapMenu;
-	GameObject dockedMenu;
+	public static IGameManager Instance {
+		get { 
+			if(_instance == null)
+				Debug.LogError("GameManager instance is null.  Attempted reference somewhere before Awake() called on first instantiated GameManager.");
+			return _instance;
+		}
+
+	}
+
+	[SerializeField] GameObject gameMenu;
+	[SerializeField] GameObject shipMenu;
+	[SerializeField] GameObject mapMenu;
+	[SerializeField] GameObject dockedMenu;
+	[SerializeField] GameObject escapeMenu;
+	[SerializeField] GameObject player;
+
+	GameObject currentGameSubMenu;
 
 	void Awake()
 	{
+		// Make GameManager a singleton.  
+		if (_instance == null)
+			_instance = this;
+		else
+			Destroy (this);
+
 		Events.instance.AddListener<ShipDamagedEvent> (ShipDamaged);
 		Events.instance.AddListener<PlayerDockedEvent> (PlayerDockedOrExit);
 
 		gameMenu.SetActive (true);
-		shipMenu = GameObject.FindGameObjectWithTag ("Ship Menu");
-		mapMenu = GameObject.FindGameObjectWithTag ("Map Menu");
-		dockedMenu = GameObject.FindGameObjectWithTag ("Docked Menu");
+		currentGameSubMenu = gameMenu.transform.GetChild(gameMenu.transform.childCount - 1).gameObject;
 		gameMenu.SetActive (false);
+		escapeMenu.SetActive (false);
 	}
 
 	void Start()
 	{
-		GameObject schematic = GameObject.FindGameObjectWithTag ("Player").GetComponent<IChassis> ().SchematicUIClone;
+		GameObject schematic = player.GetComponent<IChassis> ().SchematicUIClone;
 		schematic.transform.SetParent (shipMenu.transform.GetChild(0).transform, false);
 	}
 
@@ -35,40 +54,61 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		//Debug.Log ("Time.timeScale: " + Time.timeScale + " | Time.fixedDeltaTime: " + Time.fixedDeltaTime + " | Time.deltaTime: " + Time.deltaTime + " | Time.fixedTime: " + Time.fixedTime);
 		if (Input.GetButtonDown ("Game Menu")) {
-			ToggleGameMenu ();
-			if(gameMenu.activeSelf)
-				gameMenu.transform.GetChild(gameMenu.transform.childCount - 1).GetComponentInChildren<Button>().onClick.Invoke();
+			ToggleGameMenu (gameMenu.transform.GetChild(gameMenu.transform.childCount - 1).gameObject);	// The currently shown menu
 		} else if (Input.GetButtonDown ("Ship Menu")) {
-			ToggleGameMenu (true);
-			shipMenu.transform.GetChild (1).GetComponentInChildren<Button> ().onClick.Invoke ();
+			ToggleGameMenu (shipMenu, shipMenu != currentGameSubMenu || !gameMenu.activeSelf);
 		} else if (Input.GetButtonDown ("Map Menu")) {
-			ToggleGameMenu (true);
-			mapMenu.transform.GetChild (1).GetComponentInChildren<Button> ().onClick.Invoke ();
-			Events.instance.Raise(new MapOpennedEvent());
+			ToggleGameMenu (mapMenu, mapMenu != currentGameSubMenu || !gameMenu.activeSelf);
 		} else if (Input.GetButtonDown ("Docked Menu")) {
-			ToggleGameMenu (true);
-			dockedMenu.transform.GetChild (1).GetComponentInChildren<Button> ().onClick.Invoke ();
-		}
-		else if (Input.GetButtonDown ("Cancel") && gameMenu.activeSelf) {
-			ToggleGameMenu (false);
+			ToggleGameMenu (dockedMenu, dockedMenu != currentGameSubMenu || !gameMenu.activeSelf);
+		} else if (Input.GetButtonDown ("Cancel")) 
+		{
+			if(gameMenu.activeSelf){
+				ToggleGameMenu (shipMenu, false);  // doesn't matter which menu I give
+				ToggleEscapeMenu (false);
+			}else {
+				ToggleEscapeMenu (!escapeMenu.activeSelf);
+			}
 		}
 	}
 
-	public void ToggleGameMenu(bool active)
+	// Used by "close" button in GameMenu GUI
+	public void ToggleGameMenuOff(){
+		ToggleGameMenu (shipMenu, false);
+	}
+
+	// Used by "close" button in GameMenu GUI
+	public void ToggleEscapeMenuOff()
+	{
+		ToggleEscapeMenu (false);
+	}
+
+	private void ToggleGameMenu(GameObject subMenu, bool active)
 	{
 		gameMenu.SetActive(active);
 		if(gameMenu.activeSelf){
 			Pause();
+			currentGameSubMenu = subMenu;
+			subMenu.transform.GetChild (1).GetComponentInChildren<Button> ().onClick.Invoke ();
 		}else{
 			UnPause();
 		}
 	}
 
-	private void ToggleGameMenu()
+	private void ToggleGameMenu(GameObject subMenu)
 	{
-		ToggleGameMenu (!gameMenu.activeSelf);
+		ToggleGameMenu (subMenu, !gameMenu.activeSelf);
+	}
+
+	void ToggleEscapeMenu (bool active)
+	{
+		escapeMenu.SetActive (active);
+		if(escapeMenu.activeSelf){
+			Pause();
+		}else{
+			UnPause();
+		}
 	}
 
 	private void Pause()
@@ -91,8 +131,16 @@ public class GameManager : MonoBehaviour {
 	void PlayerDockedOrExit (PlayerDockedEvent e)
 	{
 		if (e.playerDocked) {
-			ToggleGameMenu (true);
-			dockedMenu.transform.GetChild (1).GetComponentInChildren<Button> ().onClick.Invoke ();
+			ToggleGameMenu (dockedMenu, true);
 		}
 	}
+
+	#region IGameManager implementation
+
+	public void NewGameLoaded ()
+	{
+		ToggleEscapeMenu (false);
+	}
+
+	#endregion
 }

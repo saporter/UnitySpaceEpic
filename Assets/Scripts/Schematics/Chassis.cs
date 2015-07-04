@@ -2,30 +2,25 @@
 using System.Collections;
 
 public class Chassis : MonoBehaviour, IChassis, IDamageable {
+	[SerializeField] float _maxHealth = 20f;
+	[SerializeField] GameObject Schematic;
+	[SerializeField] GameObject DestroyedEffect;
+	GameObject _schematicClone;
+	float _currentHealth;
+	IModuleSlot[] moduleSlots;
+
 	#region IChassis implementation
-	private GameObject _schematicClone;
 	public GameObject SchematicUIClone {
 		get {
 			return _schematicClone;
 		}
 	}
-
 	#endregion
 
 	#region IDamageable implementation
-	[SerializeField] float _maxHealth = 20f;
 	public float MaxHealth { get { return _maxHealth; } }
-
-	float _currentHealth;
 	public float CurrentHealth { get { return _currentHealth; } }
-
 	#endregion
-
-	[SerializeField] GameObject Schematic;
-	[SerializeField] GameObject DestroyedEffect;
-
-
-	IModuleSlot[] moduleSlots;
 
 	void Awake()
 	{

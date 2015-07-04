@@ -26,7 +26,7 @@ public class UniqueGameLogic : MonoBehaviour
 				UniqueObjectManager.DestroyObject(UniqueObjectManager.CreatedObjects[Random.Range(0, UniqueObjectManager.CreatedObjects.Count)]);
 			// ... Else, randomly create one.
 			else
-				UniqueObjectManager.InstantiatePrefab(	UniqueObjectManager.Prefabs[Random.Range(0, UniqueObjectManager.Prefabs.Length)].name, 
+				UniqueObjectManager.InstantiatePrefab(	UniqueObjectManager.Prefabs[Random.Range(0, UniqueObjectManager.Prefabs.Length)].GetComponent<ES2UniqueID>().prefabName, 
 														Random.insideUnitSphere*10, 
 														Random.rotation);
 			yield return new WaitForSeconds(runEverySeconds);

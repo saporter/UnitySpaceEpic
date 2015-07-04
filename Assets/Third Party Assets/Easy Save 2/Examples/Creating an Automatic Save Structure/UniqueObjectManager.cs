@@ -35,7 +35,7 @@ public class UniqueObjectManager : MonoBehaviour
 		// Find the prefab. If the prefab doesn't exist, throw an error.
 		GameObject prefab = FindPrefabWithName(prefabName);
 		if(prefab == null)
-			throw new System.Exception("Cannot instantiate prefab: No such prefab exists.");
+			throw new System.Exception("Cannot instantiate prefab: No such prefab exists: " + prefabName);
 		// If it doesn't have a UniqueID object, also throw error.
 		if(prefab.GetComponent<ES2UniqueID>() == null)
 			throw new System.Exception("Can't instantiate a prefab which has no UniqueID attached.");
@@ -80,7 +80,7 @@ public class UniqueObjectManager : MonoBehaviour
 		GameObject prefab = null;
 		for(int i=0; i<Prefabs.Length; i++)
 		{
-			if(Prefabs[i].name == prefabName)
+			if(Prefabs[i].GetComponent<ES2UniqueID>().prefabName == prefabName)
 				prefab = Prefabs[i];
 		}
 		return prefab;

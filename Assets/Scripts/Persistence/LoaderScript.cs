@@ -5,7 +5,6 @@ using System.IO;
 
 public class LoaderScript : MonoBehaviour, IConfirmable {
 	[SerializeField] GameObject saveSlot;
-	[SerializeField] GameObject FOWLoader;
 	[SerializeField] Camera FOWCamera;
 	[SerializeField] GameObject confirmWindow;
 
@@ -48,33 +47,8 @@ public class LoaderScript : MonoBehaviour, IConfirmable {
 
 	public void Confirmed ()
 	{
-		Load ();
-		GameManager.Instance.NewGameLoaded ();
+		Events.instance.Raise (new LoadGameEvent (saver.FileName));
 	}
 
 	#endregion
-
-	public void Load()
-	{
-		// clear the FOW texture, setting everything dark.
-		FOWCamera.clearFlags = CameraClearFlags.Color;
-		FOWCamera.Render ();	// Render camera to capture a cleared plane
-		FOWCamera.clearFlags = CameraClearFlags.Depth;
-
-		// setup loading material using saved texture (saved Fog of War overlay)
-		Texture2D tex = new Texture2D (2, 2); // size does not matter since LoadImage will replace with incoming image size
-		tex.LoadImage (File.ReadAllBytes (saver.FileName)); // path to saved texture
-		Material m = new Material(Shader.Find("Custom/TextureOnly")); // (TexutreOnly shader pasted below) Just need a shader unaffected by light, etc.
-		m.mainTexture = tex;
-		
-		// Instantiate GameObject with exact dimensions of FOW plane to be seen by camera
-		GameObject clone = Instantiate (FOWLoader) as GameObject;
-		clone.GetComponent<MeshRenderer> ().material = m;
-		
-		// Render camera to capture texture and apply to current RT (current FOW)
-		FOWCamera.Render ();
-		
-		// Destroy clone to remove from Scene
-		Destroy (clone);
-	}
 }

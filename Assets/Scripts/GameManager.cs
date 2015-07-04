@@ -2,18 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class GameManager : MonoBehaviour, IGameManager {
-	private static IGameManager _instance;
-
-	public static IGameManager Instance {
-		get { 
-			if(_instance == null)
-				Debug.LogError("GameManager instance is null.  Attempted reference somewhere before Awake() called on first instantiated GameManager.");
-			return _instance;
-		}
-
-	}
-
+public class GameManager : MonoBehaviour {
 	[SerializeField] GameObject gameMenu;
 	[SerializeField] GameObject shipMenu;
 	[SerializeField] GameObject mapMenu;
@@ -25,14 +14,9 @@ public class GameManager : MonoBehaviour, IGameManager {
 
 	void Awake()
 	{
-		// Make GameManager a singleton.  
-		if (_instance == null)
-			_instance = this;
-		else
-			Destroy (this);
-
 		Events.instance.AddListener<ShipDamagedEvent> (ShipDamaged);
 		Events.instance.AddListener<PlayerDockedEvent> (PlayerDockedOrExit);
+		Events.instance.AddListener<LoadGameEvent> (NewGameLoaded);
 
 		gameMenu.SetActive (true);
 		currentGameSubMenu = gameMenu.transform.GetChild(gameMenu.transform.childCount - 1).gameObject;
@@ -50,6 +34,7 @@ public class GameManager : MonoBehaviour, IGameManager {
 	{
 		Events.instance.RemoveListener<ShipDamagedEvent> (ShipDamaged);
 		Events.instance.RemoveListener<PlayerDockedEvent> (PlayerDockedOrExit);
+		Events.instance.RemoveListener<LoadGameEvent> (NewGameLoaded);
 	}
 
 	// Update is called once per frame
@@ -135,12 +120,8 @@ public class GameManager : MonoBehaviour, IGameManager {
 		}
 	}
 
-	#region IGameManager implementation
-
-	public void NewGameLoaded ()
+	public void NewGameLoaded (LoadGameEvent e)
 	{
 		ToggleEscapeMenu (false);
 	}
-
-	#endregion
 }

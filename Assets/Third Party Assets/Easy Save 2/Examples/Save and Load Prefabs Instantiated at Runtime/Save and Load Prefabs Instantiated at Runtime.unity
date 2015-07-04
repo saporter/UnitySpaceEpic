@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 100000, guid: 1a9173555795045f5916faefe47662e5, type: 2}
-  filename: 5361766564537068657265507265666162732e747874
+  filename: SpherePrefabs.sp
   buttonPositionX: 500
 --- !u!1 &1030674254
 GameObject:
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 100000, guid: e42377dd3afb54d2eb677a3fd520d6f8, type: 2}
-  filename: 536176656443756265507265666162732e747874
+  filename: CubePrefabs.sp
   buttonPositionX: 0
 --- !u!1 &2048071826
 GameObject:
@@ -356,5 +356,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 100000, guid: d19de4dae93704c57abd2f4b4f001ca1, type: 2}
-  filename: 536176656443796c696e646572507265666162732e747874
+  filename: CylinderPrefabs.sp
   buttonPositionX: 250

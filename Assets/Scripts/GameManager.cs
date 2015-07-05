@@ -3,18 +3,23 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
+	public static GameManager GM;	// so I can reference GameManager without using FindGameObject methods.
+
 	[SerializeField] GameObject gameMenu;
-	[SerializeField] GameObject shipMenu;
+	[SerializeField] GameObject shipMenu;		
 	[SerializeField] GameObject mapMenu;
 	[SerializeField] GameObject dockedMenu;
 	[SerializeField] GameObject escapeMenu;
 	[SerializeField] GameObject player;
 
+	public GameObject ShipMenu { get { return shipMenu; } } // whatever... it's the only one I need public right now...
+
 	GameObject currentGameSubMenu;
 
 	void Awake()
 	{
-		Events.instance.AddListener<ShipDamagedEvent> (ShipDamaged);
+		GM = this;
+		
 		Events.instance.AddListener<PlayerDockedEvent> (PlayerDockedOrExit);
 		Events.instance.AddListener<LoadGameEvent> (NewGameLoaded);
 
@@ -22,17 +27,19 @@ public class GameManager : MonoBehaviour {
 		currentGameSubMenu = gameMenu.transform.GetChild(gameMenu.transform.childCount - 1).gameObject;
 		gameMenu.SetActive (false);
 		escapeMenu.SetActive (false);
+	
 	}
 
 	void Start()
 	{
-		GameObject schematic = player.GetComponent<IChassis> ().SchematicUIClone;
-		schematic.transform.SetParent (shipMenu.transform.GetChild(0).transform, false);
+		if (PlayerPrefs.HasKey ("Load")) {
+			Events.instance.Raise (new LoadGameEvent (PlayerPrefs.GetString ("Load")));
+			PlayerPrefs.DeleteKey("Load");
+		}
 	}
 
 	void OnDestroy()
 	{
-		Events.instance.RemoveListener<ShipDamagedEvent> (ShipDamaged);
 		Events.instance.RemoveListener<PlayerDockedEvent> (PlayerDockedOrExit);
 		Events.instance.RemoveListener<LoadGameEvent> (NewGameLoaded);
 	}
@@ -106,13 +113,6 @@ public class GameManager : MonoBehaviour {
 		Time.timeScale = 1f;
 	}
 
-	void ShipDamaged(ShipDamagedEvent e)
-	{
-		if (e.Ship.tag == "Player" && e.Ship.GetComponent<IDamageable>().CurrentHealth < 0f) {
-			Destroy(e.Ship.GetComponent<IChassis>().SchematicUIClone);
-		}
-	}
-
 	void PlayerDockedOrExit (PlayerDockedEvent e)
 	{
 		if (e.playerDocked) {
@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void NewGameLoaded (LoadGameEvent e)
+	void NewGameLoaded (LoadGameEvent e)
 	{
 		ToggleEscapeMenu (false);
 	}

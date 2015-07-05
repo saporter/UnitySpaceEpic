@@ -70,7 +70,6 @@ public class Chassis : MonoBehaviour, IChassis, IDamageable {
 	public void ApplyDamage (float damage)
 	{
 		_currentHealth -= damage;
-		Events.instance.Raise (new ShipDamagedEvent(this.gameObject));
 		if (_currentHealth < 0f) {
 			GameObject clone = Instantiate(DestroyedEffect, transform.position, transform.rotation) as GameObject;
 			Destroy(clone, 1.5f);

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SavePlayer : MonoBehaviour {
+public class SaveLoadPlayer : MonoBehaviour {
 	IDamageable playerShip;
 
 	void Awake()
@@ -11,10 +11,21 @@ public class SavePlayer : MonoBehaviour {
 		playerShip = GetComponent<IDamageable> ();
 	}
 
+	void Start()
+	{
+		// Add schematic to shipMenu.  This is how our ship layout is interacted with by player
+		GameObject schematic = GetComponent<IChassis> ().SchematicUIClone;
+		schematic.transform.SetParent (GameManager.GM.ShipMenu.transform.GetChild(0).transform, false);
+	}
+
 	void OnDestroy()
 	{
 		Events.instance.RemoveListener<SaveGameEvent> (SaveData);
 		Events.instance.RemoveListener<LoadGameEvent> (LoadData);
+
+		GameObject schematic = GetComponent<IChassis> ().SchematicUIClone;
+		if(schematic != null)	// This happens when a new game is loaded (after already playing)
+			Destroy(schematic);
 	}
 
 	void SaveData (SaveGameEvent e)

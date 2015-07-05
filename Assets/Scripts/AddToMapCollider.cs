@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 
-public class AddToMapCollider : MonoBehaviour {
+public class AddToMapCollider : MonoBehaviour, IAddToMapElement {
 	static GameObject mapCanvas;
 
 	[SerializeField] GameObject mapElement;
@@ -31,22 +31,41 @@ public class AddToMapCollider : MonoBehaviour {
 		if (elementAdded)
 			return;
 
-
 		 if(other.gameObject.tag == "Aperture Mask"){
-
-			//Debug.Log("Adding map element for " + gameObject.name);
-			GameObject clone = Instantiate(mapElement) as GameObject;
-			clone.transform.SetParent(mapCanvas.transform, false);
-			clone.GetComponent<IMappable>().FollowGameObject = gameObject;
-			if(gameObject.tag != "Player")
-				clone.transform.SetAsFirstSibling();
-
-			if(clone.transform.childCount > 0)
-				clone.transform.GetChild(0).gameObject.GetComponent<Text>().text = this.text;
-
-			clone.GetComponent<IMappable>().SnapToGameObject();
-
-			elementAdded = true;
+			AddElement();
 		}
 	}
+
+	#region IAddToMapElement implementation
+
+	public bool ElementAdded {
+		get {
+			return elementAdded;
+		}
+	}
+	public string ElementName {
+		get {
+			return text;
+		}
+	}
+
+	public void AddElement ()
+	{
+		GameObject clone = Instantiate(mapElement) as GameObject;
+		clone.transform.SetParent(mapCanvas.transform, false);
+		clone.GetComponent<IMappable>().FollowGameObject = gameObject;
+		if(gameObject.tag != "Player")
+			clone.transform.SetAsFirstSibling();
+		
+		if(clone.transform.childCount > 0)
+			clone.transform.GetChild(0).gameObject.GetComponent<Text>().text = this.text;
+		
+		clone.GetComponent<IMappable>().SnapToGameObject();
+		
+		elementAdded = true;
+	}
+
+
+
+	#endregion
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 
-public class SaveFogofWar : MonoBehaviour {
+public class SaveLoadFogofWar : MonoBehaviour {
 	[SerializeField] GameObject FOWLoader;
 	RenderTexture fogOfWarRT;
 	Camera c;

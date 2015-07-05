@@ -47,7 +47,8 @@ public class LoaderScript : MonoBehaviour, IConfirmable {
 
 	public void Confirmed ()
 	{
-		Events.instance.Raise (new LoadGameEvent (saver.FileName));
+		PlayerPrefs.SetString ("Load", saver.FileName);
+		Application.LoadLevel ("Main");
 	}
 
 	#endregion

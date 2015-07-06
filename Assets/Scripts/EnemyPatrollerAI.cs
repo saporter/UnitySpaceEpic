@@ -147,7 +147,7 @@ public class EnemyPatrollerAI : MonoBehaviour, IMover, IShooter {
 
 	void EngagedByEnemy(ShipDamagedEvent e)
 	{
-		if (target == null)
+		if (target == null || e.Ship != gameObject)
 			return;
 		targetLastSeen = target.transform.position;
 	}

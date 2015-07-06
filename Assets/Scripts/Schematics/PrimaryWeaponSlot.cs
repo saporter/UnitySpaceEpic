@@ -25,5 +25,10 @@ public class PrimaryWeaponSlot : MonoBehaviour, IModuleSlot {
 	}
 	#endregion
 
-
+	void OnDestroy()
+	{
+		//Debug.Log ("Confirmed! OnDestroy called when supposed to...");
+		if (moduleClone != null)
+			Destroy (moduleClone);
+	}
 }

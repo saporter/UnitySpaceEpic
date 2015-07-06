@@ -10,6 +10,7 @@ GameObject:
   - 224: {fileID: 22491980}
   - 222: {fileID: 22204202}
   - 114: {fileID: 11438670}
+  - 114: {fileID: 11462042}
   m_Layer: 5
   m_Name: Fighter Schematic
   m_TagString: Untagged
@@ -329,6 +330,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11462042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4350e7b37d217443b71b043e1f1aad9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: Simple Chassis
+  primaryWeapon: {fileID: 0}
+  secondaryWeapon: {fileID: 0}
+  engine: {fileID: 0}
 --- !u!114 &11463178
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -5,14 +5,17 @@ public class Chassis : MonoBehaviour, IChassis, IDamageable {
 	[SerializeField] float _maxHealth = 20f;
 	[SerializeField] GameObject Schematic;
 	[SerializeField] GameObject DestroyedEffect;
-	GameObject _schematicClone;
 	float _currentHealth;
 	IModuleSlot[] moduleSlots;
 
 	#region IChassis implementation
-	public GameObject SchematicUIClone {
+	public GameObject SchematicUI {
 		get {
-			return _schematicClone;
+			return Schematic;
+		}
+		set {
+			Schematic = value;
+			UpdateChassis();
 		}
 	}
 	#endregion
@@ -24,15 +27,7 @@ public class Chassis : MonoBehaviour, IChassis, IDamageable {
 
 	void Awake()
 	{
-		Events.instance.AddListener<ContainerChangedEvent> (moduleInstalled);
-
-		_schematicClone = Instantiate (Schematic) as GameObject;
-		_schematicClone.transform.SetParent(this.transform);
-		moduleSlots = _schematicClone.GetComponentsInChildren<IModuleSlot> ();
-		foreach (IModuleSlot m in moduleSlots) {
-			m.ShipGameObject = this.gameObject;
-			m.UpdateShip();
-		}
+		UpdateChassis ();
 	}
 
 	void Start()
@@ -41,28 +36,21 @@ public class Chassis : MonoBehaviour, IChassis, IDamageable {
 		_currentHealth = _maxHealth;
 	}
 
-	void LoadVars()
+	private void LoadVars()
 	{
-		IXmlLoader XmlLoader = GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IXmlLoader>();
+		IXmlLoader XmlLoader = GameManager.GM.GetComponentInChildren<IXmlLoader>();
 
 		if (!XmlLoader.FloatVars.TryGetValue ("Chassis.MaxHealth", out _maxHealth))
 			Debug.LogError ("Could not find Chassis.MaxHealth from XmlLoader");
 	}
 
-	void OnDestroy()
+	private void UpdateChassis()
 	{
-		Events.instance.RemoveListener<ContainerChangedEvent> (moduleInstalled);
-	}
-
-	void moduleInstalled(ContainerChangedEvent e)
-	{
-		if (e.OldSlot != null && e.OldSlot.GetComponent<IModuleSlot> () != null) {
-			e.OldSlot.GetComponent<IModuleSlot>().UpdateShip();
+		moduleSlots = Schematic.GetComponentsInChildren<IModuleSlot> ();
+		foreach (IModuleSlot m in moduleSlots) {
+			m.ShipGameObject = this.gameObject;
+			m.UpdateShip();
 		}
-		if (e.Item.transform.parent != null && e.Item.transform.parent.gameObject.GetComponent<IModuleSlot> () != null) {
-			e.Item.transform.parent.gameObject.GetComponent<IModuleSlot>().UpdateShip();
-		}
-
 	}
 
 	#region IDamageable implementation
@@ -70,6 +58,7 @@ public class Chassis : MonoBehaviour, IChassis, IDamageable {
 	public void ApplyDamage (float damage)
 	{
 		_currentHealth -= damage;
+		Events.instance.Raise (new ShipDamagedEvent (gameObject));
 		if (_currentHealth < 0f) {
 			GameObject clone = Instantiate(DestroyedEffect, transform.position, transform.rotation) as GameObject;
 			Destroy(clone, 1.5f);

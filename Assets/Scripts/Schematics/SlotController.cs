@@ -29,7 +29,16 @@ public class SlotController : MonoBehaviour, IDropHandler {
 		if (transform.childCount == 0){
 			GameObject movingFrom = eventData.pointerDrag.transform.parent.gameObject != null ? eventData.pointerDrag.transform.parent.gameObject : null;
 			eventData.pointerDrag.transform.SetParent(transform);
-			Events.instance.Raise(new ContainerChangedEvent(movingFrom, eventData.pointerDrag));
+
+			// Update the ModuleSlots
+			IModuleSlot from = movingFrom != null ? movingFrom.GetComponent<IModuleSlot>() : null;
+			IModuleSlot to = eventData.pointerDrag.transform.parent.gameObject.GetComponent<IModuleSlot> ();
+			if(from != null)
+				from.UpdateShip();
+			if(to != null)
+				to.UpdateShip();
+
+			//Events.instance.Raise(new ContainerChangedEvent(movingFrom, eventData.pointerDrag));
 		}
 	}
 

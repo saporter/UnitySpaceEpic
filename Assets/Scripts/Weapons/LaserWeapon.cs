@@ -29,8 +29,6 @@ public class LaserWeapon : MonoBehaviour, IWeapon {
 		damageEffect.transform.parent = this.transform;
 		damageEffect.SetActive (false);
 		shipMask = 1 << LayerMask.NameToLayer ("Ship");
-
-
 	}
 
 	void Start()

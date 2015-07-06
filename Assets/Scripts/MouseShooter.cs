@@ -32,29 +32,29 @@ public class MouseShooter : MonoBehaviour, IShooter {
 	// Update is called once per frame
 	void FixedUpdate () {
 		// Primary weapon
-		if (Input.GetAxisRaw("Fire1") > 0f && _primary != null) {
+		if (Input.GetAxisRaw("Fire1") > 0f && Primary != null) {
 			Vector3? target = MousePointOnFloor();
 			if (target.HasValue) 
 			{
 				primaryUp = true;
-				_primary.FireButtonDown(target.Value);
+				Primary.FireButtonDown(target.Value);
 			}
-		}else if(primaryUp && _primary != null){
+		}else if(primaryUp && Primary != null){
 			primaryUp = false;
-			_primary.FireButtonUp();
+			Primary.FireButtonUp();
 		}
 
 		// Secondary weapon
-		if (Input.GetAxisRaw("Fire2") > 0f && _secondary != null) {
+		if (Input.GetAxisRaw("Fire2") > 0f && Secondary != null) {
 			Vector3? target = MousePointOnFloor();
 			if (target.HasValue) 
 			{
 				secondaryUp = true;
-				_secondary.FireButtonDown(target.Value);
+				Secondary.FireButtonDown(target.Value);
 			}
-		}else if(secondaryUp && _secondary != null){
+		}else if(secondaryUp && Secondary != null){
 			secondaryUp = false;
-			_secondary.FireButtonUp();
+			Secondary.FireButtonUp();
 		}
 	}
 

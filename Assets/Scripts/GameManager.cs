@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour {
 
 	void Start()
 	{
+		// Try to refact other objects so everything is set up by the end of Awake()
+		Debug.Log ("TODO: Mistake to load game from Start() in GM.  Certain objects still have not been set up yet...");
+		/////
+
 		if (PlayerPrefs.HasKey ("Load")) {
 			Events.instance.Raise (new LoadGameEvent (PlayerPrefs.GetString ("Load")));
 			PlayerPrefs.DeleteKey("Load");

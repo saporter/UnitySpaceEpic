@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public interface IChassis {
-	GameObject SchematicUIClone { get; }
+	GameObject SchematicUI { get; set; }
 }

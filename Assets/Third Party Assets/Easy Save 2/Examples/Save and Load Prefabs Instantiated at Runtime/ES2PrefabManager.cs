@@ -7,7 +7,7 @@ using System.Collections.Generic;
  * It will also store a list of all of the prefabs we've created.
  * 
  */
-public class PrefabManager : MonoBehaviour 
+public class ES2PrefabManager : MonoBehaviour 
 {
 	// The prefab we want to create.
 	public GameObject prefab;

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class UIContainer : MonoBehaviour, IContainer {
-	#region IShipModule implementation
+	#region IContainer implementation
 	[SerializeField] private GameObject _contents;
 
 	public GameObject Contents {

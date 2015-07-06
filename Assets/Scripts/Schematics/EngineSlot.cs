@@ -24,4 +24,10 @@ public class EngineSlot : MonoBehaviour, IModuleSlot {
 		ShipGameObject.GetComponent<IMover>().Engines = moduleClone.GetComponent<IEngine>();
 	}
 	#endregion
+
+	void OnDestroy()
+	{
+		if (moduleClone != null)
+			Destroy (moduleClone);
+	}
 }

@@ -24,4 +24,10 @@ public class SecondaryWeaponSlot : MonoBehaviour, IModuleSlot {
 		ShipGameObject.GetComponent<IShooter>().Secondary = moduleClone.GetComponent<IWeapon>();
 	}
 	#endregion
+
+	void OnDestroy()
+	{
+		if (moduleClone != null)
+			Destroy (moduleClone);
+	}
 }

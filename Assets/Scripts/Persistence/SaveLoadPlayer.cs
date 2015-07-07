@@ -2,13 +2,11 @@
 using System.Collections;
 
 public class SaveLoadPlayer : MonoBehaviour {
-	IPrefabManager prefabManager;
 
 	void Awake()
 	{
 		Events.instance.AddListener<SaveGameEvent> (SaveData);
 		Events.instance.AddListener<LoadGameEvent> (LoadData);
-		prefabManager = GameManager.GM.GetComponentInChildren<IPrefabManager> ();
 	}
 
 	void Start()
@@ -43,12 +41,12 @@ public class SaveLoadPlayer : MonoBehaviour {
 	
 	void LoadData (LoadGameEvent e)
 	{
+		IPrefabManager prefabManager = GameManager.GM.GetComponentInChildren<IPrefabManager> ();
 		IDamageable playerShip = GetComponent<IDamageable> ();
 		IChassis chassis = GetComponent<IChassis> ();
 
 		ES2.Load<Transform> (e.File + "?tag=SavePlayer_transform", transform);
-		float savedHealth = ES2.Load<float> (e.File + "?tag=SavePlayer_currentHealth");
-		playerShip.ApplyDamage (playerShip.CurrentHealth - savedHealth);
+		playerShip.SetHealth (ES2.Load<float> (e.File + "?tag=SavePlayer_currentHealth"));
 
 		// Load schematic
 		if (chassis.SchematicUI != null) {

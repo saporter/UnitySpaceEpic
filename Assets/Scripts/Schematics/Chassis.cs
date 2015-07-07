@@ -65,6 +65,15 @@ public class Chassis : MonoBehaviour, IChassis, IDamageable {
 			Destroy(this.gameObject);
 		}
 	}
+
+	public void SetHealth(float toHealth)
+	{
+		_currentHealth = toHealth;
+		if (_currentHealth > _maxHealth)
+			_currentHealth = _maxHealth;
+		else if (_currentHealth <= 0f)
+			ApplyDamage (0f); // I'm destroyed
+	}
 	
 	#endregion
 

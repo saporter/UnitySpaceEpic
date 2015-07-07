@@ -25,6 +25,11 @@ public class ColliderDamageParent : MonoBehaviour, IDamageable {
 		transform.parent.GetComponent<IDamageable> ().ApplyDamage (damage);
 	}
 
+	public void SetHealth(float toHealth)
+	{
+		transform.parent.GetComponent<IDamageable> ().SetHealth (toHealth);
+	}
+
 	#endregion
 
 

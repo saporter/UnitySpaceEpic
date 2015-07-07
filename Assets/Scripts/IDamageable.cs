@@ -7,4 +7,5 @@ public interface IDamageable {
 
 
 	void ApplyDamage(float damage);
+	void SetHealth(float toHealth);
 }

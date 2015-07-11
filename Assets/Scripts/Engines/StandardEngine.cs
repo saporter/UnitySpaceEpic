@@ -23,14 +23,14 @@ public class StandardEngine : MonoBehaviour, IEngine {
 
 	#endregion
 
-	void Start()
+	void Awake()
 	{
 		LoadVars ();
 	}
 
 	void LoadVars()
 	{
-		IXmlLoader XmlLoader = GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IXmlLoader>();
+		IDataLoader XmlLoader = GameManager.GM.DataLoader;//GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IDataLoader>();
 		
 		if (!XmlLoader.FloatVars.TryGetValue ("StandardEngine.MaxSpeed", out _maxSpeed))
 			Debug.LogError ("Could not find StandardEngine.MaxSpeed from XmlLoader");

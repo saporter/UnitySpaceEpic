@@ -7,10 +7,7 @@ public class SaveLoadPlayer : MonoBehaviour {
 	{
 		Events.instance.AddListener<SaveGameEvent> (SaveData);
 		Events.instance.AddListener<LoadGameEvent> (LoadData);
-	}
 
-	void Start()
-	{
 		// Add schematic to shipMenu.  This is how our ship layout is interacted with by player
 		moveSchematicToUI();
 	}
@@ -41,7 +38,7 @@ public class SaveLoadPlayer : MonoBehaviour {
 	
 	void LoadData (LoadGameEvent e)
 	{
-		IPrefabManager prefabManager = GameManager.GM.GetComponentInChildren<IPrefabManager> ();
+		IPrefabManager prefabManager = GameManager.GM.PrefabManager;
 		IDamageable playerShip = GetComponent<IDamageable> ();
 		IChassis chassis = GetComponent<IChassis> ();
 
@@ -56,6 +53,7 @@ public class SaveLoadPlayer : MonoBehaviour {
 		schematic = Instantiate<GameObject> (schematic);
 		schematic.GetComponent<ISaveLoadable> ().Load (e.File);
 		chassis.SchematicUI = schematic;
+		moveSchematicToUI ();
 	}
 
 	private void moveSchematicToUI()

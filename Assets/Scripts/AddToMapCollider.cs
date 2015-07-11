@@ -15,7 +15,7 @@ public class AddToMapCollider : MonoBehaviour, IAddToMapElement {
 	void Awake()
 	{
 		if (mapCanvas == null) {
-			GameObject map = GameObject.FindGameObjectWithTag ("Map Canvas");
+			GameObject map = GameManager.GM.MapCanvas;
 			if(map == null)
 				Debug.LogError ("No Map Canvas found in Scene");
 			mapCanvas = map;

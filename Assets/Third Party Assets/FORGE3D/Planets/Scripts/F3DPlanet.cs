@@ -14,16 +14,16 @@ public class F3DPlanet : MonoBehaviour
     float orbitRadius;
     Vector3 orbitAxis;
 	float timeAsleep;
-    //Vector3 pointToPlanetDir;
 
     // Use this for initialization
     void Awake ()
     {
+		Events.instance.AddListener<LoadGameEvent> (NewGameLoaded);
+
         if (OrbitPoint)
         {
             orbitRadius = Vector3.Distance(transform.position, OrbitPoint.position);
 			orbitAxis = FlattenOrbit ? Vector3.up : transform.up;
-            //pointToPlanetDir = Vector3.Normalize(transform.position - OrbitPoint.position);
         }
 		timeAsleep = Time.timeSinceLevelLoad;
 		if (GetComponent<Rigidbody> () == null) {
@@ -31,6 +31,11 @@ public class F3DPlanet : MonoBehaviour
 			r.isKinematic = true;
 		}
     }
+
+	void OnDestroy()
+	{
+		Events.instance.RemoveListener<LoadGameEvent> (NewGameLoaded);
+	}
 
 	void OnEnable()
 	{
@@ -43,16 +48,12 @@ public class F3DPlanet : MonoBehaviour
 		timeAsleep = Time.timeSinceLevelLoad;
 	}
     
-    // Update is called once per frame
     void FixedUpdate ()
     {
         transform.rotation *= Quaternion.Euler(0f, RotationRate * Time.deltaTime, 0f);
 
         if (OrbitPoint)
         {
-//            pointToPlanetDir = Quaternion.AngleAxis(OrbitRate * Time.deltaTime, orbitAxis) * pointToPlanetDir;
-//            transform.position = OrbitPoint.position + pointToPlanetDir * distToOrbitPoint;
-			//transform.RotateAround(OrbitPoint.position, orbitAxis, ((OrbitRate / Mathf.Deg2Rad) / orbitRadius) * Time.deltaTime);//OrbitRate * Time.deltaTime);
 			OrbitAroundPoint(Time.fixedDeltaTime);
         }
     }
@@ -60,5 +61,10 @@ public class F3DPlanet : MonoBehaviour
 	public void OrbitAroundPoint(float time)
 	{
 		transform.RotateAround(OrbitPoint.position, orbitAxis, ((OrbitRate / Mathf.Deg2Rad) / orbitRadius) * time);//OrbitRate * Time.deltaTime);
+	}
+
+	void NewGameLoaded (LoadGameEvent e)
+	{
+		OrbitAroundPoint (GameManager.GM.GameTime);
 	}
 }

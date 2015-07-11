@@ -7,7 +7,7 @@ public class BackgroundLeaper : MonoBehaviour, IMapEnabler {
 
 	void Awake()
 	{
-		player = GameObject.FindGameObjectWithTag ("Player");
+		player = GameManager.GM.Player;
 
 		float myDistance = transform.position.x - player.transform.position.x;
 		maxDistance = myDistance > maxDistance ? myDistance : maxDistance;

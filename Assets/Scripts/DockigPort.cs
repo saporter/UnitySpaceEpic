@@ -7,7 +7,7 @@ public class DockigPort : MonoBehaviour {
 
 	void Awake()
 	{
-		player = GameObject.FindGameObjectWithTag ("Player");
+		player = GameManager.GM.Player;
 		docking = null;
 	}
 

@@ -29,17 +29,13 @@ public class LaserWeapon : MonoBehaviour, IWeapon {
 		damageEffect.transform.parent = this.transform;
 		damageEffect.SetActive (false);
 		shipMask = 1 << LayerMask.NameToLayer ("Ship");
-	}
 
-	void Start()
-	{
-		// Data values from XML
 		LoadVars ();
 	}
 
 	void LoadVars()
 	{
-		IXmlLoader XmlLoader = GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IXmlLoader>();
+		IDataLoader XmlLoader = GameManager.GM.DataLoader;// GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IDataLoader>();
 
 		if (!XmlLoader.FloatVars.TryGetValue ("LaserWeapon.MaxDistance", out maxDistance))
 			Debug.LogError ("Could not find LaserWeapon.MaxDistance from XmlLoader");

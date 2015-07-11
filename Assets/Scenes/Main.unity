@@ -10300,7 +10300,8 @@ MonoBehaviour:
   mapMenu: {fileID: 1920993316}
   dockedMenu: {fileID: 1986467000}
   escapeMenu: {fileID: 1607618915}
-  player: {fileID: 2135419961}
+  _player: {fileID: 2135419961}
+  _mapCanvas: {fileID: 1755878131}
 --- !u!1001 &1594466717
 Prefab:
   m_ObjectHideFlags: 0

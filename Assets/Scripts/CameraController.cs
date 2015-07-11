@@ -13,16 +13,13 @@ public class CameraController : MonoBehaviour {
 	{
 		offset = transform.position;
 		if (player == null)
-			player = GameObject.FindGameObjectWithTag ("Player");
-	}
-	void Start()
-	{
+			player = GameManager.GM.Player;
 		LoadVars ();
 	}
 	
 	void LoadVars()
 	{
-		IXmlLoader XmlLoader = GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IXmlLoader>();
+		IDataLoader XmlLoader = GameManager.GM.DataLoader;//GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IDataLoader>();
 		
 		if (!XmlLoader.FloatVars.TryGetValue ("CameraController.Padding", out padding))
 			Debug.LogError ("Could not find CameraController.Padding from XmlLoader");

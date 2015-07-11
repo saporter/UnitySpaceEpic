@@ -159,6 +159,6 @@ public class EnemyPatrollerAI : MonoBehaviour, IMover, IShooter {
 			targetLastSeen = null;
 		}
 		else
-			target = GameObject.FindGameObjectWithTag ("Player");
+			target = GameManager.GM.Player;
 	}
 }

@@ -17,19 +17,15 @@ public class MapCameraController : MonoBehaviour, IMapCamera {
 	{
 		offset = transform.position;
 		if (player == null)
-			player = GameObject.FindGameObjectWithTag ("Player");
+			player = GameManager.GM.Player;
 		if (MapUI == null)
 			Debug.LogError ("MapUI is null in " + gameObject.name + ". Assign MapUI to the Map tap GameObject in Game Menu.");
-	}
-
-	void Start()
-	{
 		LoadVars ();
 	}
 
 	void LoadVars()
 	{
-		IXmlLoader XmlLoader = GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IXmlLoader>();
+		IDataLoader XmlLoader = GameManager.GM.DataLoader;// GameObject.FindGameObjectWithTag ("XmlLoader").GetComponent<IDataLoader>();
 		
 		if (!XmlLoader.FloatVars.TryGetValue ("MapCameraController.Padding", out padding))
 			Debug.LogError ("Could not find MapCameraController.Padding from XmlLoader");

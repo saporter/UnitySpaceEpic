@@ -6,6 +6,6 @@ public class JumpToPlayerOnAwake : MonoBehaviour {
 
 	void Awake()
 	{
-		transform.position = GameObject.FindGameObjectWithTag("Player").transform.position + offset;
+		transform.position = GameManager.GM.Player.transform.position + offset;
 	}
 }

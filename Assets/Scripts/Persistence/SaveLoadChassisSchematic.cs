@@ -39,7 +39,7 @@ public class SaveLoadChassisSchematic : MonoBehaviour, ISaveLoadable {
 	}
 	public void Load (string file)
 	{
-		IPrefabManager prefabManager = GameManager.GM.GetComponentInChildren<IPrefabManager> ();
+		IPrefabManager prefabManager = GameManager.GM.PrefabManager;
 
 		GameObject module = null;
 		if (ES2.Exists (file + "?tag=SaveLoadChassisSchematic_primary"))

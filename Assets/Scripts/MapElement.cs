@@ -7,6 +7,7 @@ public class MapElement : MonoBehaviour, IMappable {
 	GameObject label;
 	Vector3 offset;
 
+	// fine in start.  Since MapElements are not instantiated until af
 	void Start()
 	{
 		// If I have a label, add it to the TextCanvas
